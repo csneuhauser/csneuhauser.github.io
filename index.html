@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Personal Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --ink: #1a1510;
+      --rust: #b8490a;
+      --warm-gray: #8a7e72;
+      --border: #d8cfc4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 3rem;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      opacity: 0;
+      animation: fadeDown .6s .1s forwards;
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      letter-spacing: .02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      text-decoration: none; color: var(--warm-gray);
+      font-size: .875rem; font-weight: 400; letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--rust); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 3rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-size: .8rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .5s .3s forwards;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05; font-weight: 700;
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .6s .45s forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--rust); }
+    .hero p {
+      max-width: 520px; font-size: 1.1rem;
+      color: var(--warm-gray); line-height: 1.75;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp .6s .6s forwards;
+    }
+    .btn-group {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .5s .75s forwards;
+    }
+    .btn {
+      display: inline-block; padding: .75rem 1.75rem;
+      font-size: .9rem; font-weight: 500; letter-spacing: .04em;
+      text-decoration: none; border-radius: 2px;
+      transition: all .2s;
+    }
+    .btn-primary { background: var(--ink); color: var(--cream); }
+    .btn-primary:hover { background: var(--rust); }
+    .btn-outline {
+      border: 1.5px solid var(--border); color: var(--ink);
+    }
+    .btn-outline:hover { border-color: var(--ink); }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 5rem 3rem; max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-image {
+      aspect-ratio: 3/4; background: var(--border);
+      border-radius: 2px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--warm-gray); font-size: .875rem;
+    }
+    .about-text p { color: var(--warm-gray); margin-bottom: 1.25rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+    .skill-tag {
+      padding: .3rem .85rem; border: 1px solid var(--border);
+      font-size: .8rem; letter-spacing: .04em; border-radius: 999px;
+      color: var(--warm-gray);
+    }
+
+    /* ── WORK ── */
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .work-card {
+      border: 1px solid var(--border); padding: 2rem;
+      border-radius: 2px; transition: border-color .2s, transform .2s;
+      text-decoration: none; color: inherit; display: block;
+    }
+    .work-card:hover { border-color: var(--rust); transform: translateY(-2px); }
+    .work-card .tag {
+      font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 1rem;
+    }
+    .work-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: .75rem; }
+    .work-card p { font-size: .9rem; color: var(--warm-gray); }
+    .work-card .arrow { margin-top: 1.5rem; color: var(--rust); font-size: 1.2rem; }
+
+    /* ── CONTACT ── */
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-inner p { color: var(--warm-gray); margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: .75rem; }
+    .contact-links a {
+      text-decoration: none; color: var(--ink); font-weight: 500;
+      font-size: .95rem; display: flex; align-items: center; gap: .5rem;
+      transition: color .2s;
+    }
+    .contact-links a:hover { color: var(--rust); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 900px; margin: 0 auto;
+      font-size: .8rem; color: var(--warm-gray);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.25rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      section { padding: 3.5rem 1.5rem; }
+      .about-grid, .work-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+      footer { flex-direction: column; gap: .5rem; text-align: center; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Your Name</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">Open to new opportunities</p>
+    <h1>Strategist,<br /><em>Connector</em>,<br />Growth Driver.</h1>
+    <p>I help companies identify opportunities, forge lasting partnerships, and build the revenue pipelines that fuel long-term growth.</p>
+    <div class="btn-group">
+      <a href="#work" class="btn btn-primary">View Achievements</a>
+      <a href="#contact" class="btn btn-outline">Let's Connect</a>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About Me</div>
+    <div class="about-grid">
+      <div class="about-image">[ your photo here ]</div>
+      <div class="about-text">
+        <h2>A little about who I am.</h2>
+        <p>I'm a business development professional based in [Your City] with [X] years of experience driving growth across [Your Industry]. I specialise in identifying untapped market opportunities, building high-value partnerships, and leading cross-functional teams to close complex, multi-stakeholder deals.</p>
+        <p>My approach is relationship-first: I believe the best revenue growth comes from genuine trust, strategic alignment, and a deep understanding of what clients actually need — not just what they ask for.</p>
+        <div class="skills">
+          <span class="skill-tag">Partnership Development</span>
+          <span class="skill-tag">Revenue Strategy</span>
+          <span class="skill-tag">Enterprise Sales</span>
+          <span class="skill-tag">Negotiation</span>
+          <span class="skill-tag">Market Expansion</span>
+          <span class="skill-tag">CRM & Pipeline</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- ACHIEVEMENTS -->
+  <section id="work">
+    <div class="section-label">Selected Achievements</div>
+    <h2>Milestones that matter.</h2>
+    <br />
+    <div class="work-grid">
+      <a href="#" class="work-card">
+        <div class="tag">Revenue Growth</div>
+        <h3>$12M Pipeline Built</h3>
+        <p>Developed and closed a new enterprise pipeline from scratch within 18 months, expanding into two previously untapped verticals.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a href="#" class="work-card">
+        <div class="tag">Strategic Partnerships</div>
+        <h3>Regional Alliance Programme</h3>
+        <p>Negotiated and launched a network of 15 channel partners across EMEA, generating 30% of annual recurring revenue.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a href="#" class="work-card">
+        <div class="tag">Market Expansion</div>
+        <h3>APAC Market Entry</h3>
+        <p>Led go-to-market strategy for entry into three new APAC markets, securing anchor clients within the first two quarters.</p>
+        <div class="arrow">→</div>
+      </a>
+      <a href="#" class="work-card">
+        <div class="tag">Client Retention</div>
+        <h3>95% Renewal Rate</h3>
+        <p>Redesigned the post-sale engagement model for enterprise accounts, driving a 95% renewal rate and a 40% increase in upsells.</p>
+        <div class="arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <div>
+      <h2>Let's start a conversation.</h2>
+      <p style="color: var(--warm-gray); max-width: 520px; margin-bottom: 2rem;">Whether you're exploring a potential partnership, looking to expand into new markets, or simply want to connect — I'd love to hear from you.</p>
+      <div class="contact-links">
+        <a href="mailto:hello@yoursite.com">✉ hello@yoursite.com</a>
+        <a href="https://linkedin.com" target="_blank">↗ LinkedIn</a>
+        <a href="https://twitter.com" target="_blank">↗ Twitter / X</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Your Name. All rights reserved.</span>
+    <span>Built with care ♥</span>
+  </footer>
+
+</body>
+</html>
