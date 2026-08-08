@@ -588,7 +588,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0.5rem;
     font-family: var(--font-text);
     text-transform: uppercase;
@@ -605,8 +605,10 @@
     transition: color 0.2s, border-color 0.2s;
   }
   .footer a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+  .footer-credit { flex: 1 1 auto; min-width: 0; }
   .footer .monogram-mark {
     display: inline-flex;
+    flex: 0 0 auto;
     color: var(--oxblood);
     opacity: 0.4;
   }
@@ -640,6 +642,38 @@
     .timeline { padding-left: 1.7rem; }
     .tl-item::before { left: -1.7rem; }
     .tl-item.has-many .tl-stint::before { left: calc(-1.7rem + 2px); }
+
+    /* ── Pronunciation on small screens ──
+       The expanded phrase is wider than a phone line, so the inline-block
+       reflows onto the next line the instant it outgrows the space left —
+       a jump no transition can smooth over. Here the word stays put and the
+       pronunciation eases in underneath it, with the paragraph below moved
+       out of the way over the same duration. */
+    .pron {
+      width: var(--pron-w, auto) !important;
+      clip-path: none;
+      cursor: pointer;
+    }
+    .pron-ipa {
+      top: 100%;
+      left: 0;
+      padding-top: 0.3rem;
+      transform: translateY(-0.35rem);
+      transition: opacity 0.4s ease,
+                  transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .pron-ipa-lead { display: none; }   /* the word itself is still on screen */
+    .pron.is-open .pron-word,
+    .pron:focus-visible .pron-word { opacity: 1; }
+    .pron.is-open .pron-ipa { transform: translateY(0); }
+    .intro-name-line {
+      transition: margin-bottom 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .intro-name-line:has(.pron.is-open) { margin-bottom: 2.5em; }
+
+    /* Keep the monogram on the credit line's right edge instead of letting
+       it wrap to a row of its own once the text needs two lines. */
+    .footer { gap: 1.25rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -732,7 +766,7 @@
             </div>
           </div>
           <div class="intro-text">
-            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true">Schuyler, pronounced <span class="pron-ipa-text">/ˈskaɪlər/ SKY-lər</span></span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
+            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true"><span class="pron-ipa-lead">Schuyler, </span>pronounced <span class="pron-ipa-text">/ˈskaɪlər/ SKY-lər</span></span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
             I am a historian by training with professional experience in the financial technology sector.
             Most recently, I have been participating in a fellowship program run by Fleet AI, an agentic AI startup,
             and working on a variety of software development projects. I am increasingly curious about the
@@ -994,7 +1028,7 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <span>&copy; MMXXVI &middot; C. Schuyler Neuhauser &middot; <a href="#privacy">Privacy</a></span>
+    <span class="footer-credit">&copy; MMXXVI &middot; C. Schuyler Neuhauser &middot; <a href="#privacy">Privacy</a></span>
     <span class="monogram-mark" aria-hidden="true">
       <svg viewBox="0 0 864 864" xmlns="http://www.w3.org/2000/svg" focusable="false">
         <path fill="currentColor" d="M160.3,253.6c-8.8,13.4-16.6,27.4-23.4,42.1c-16.2,35-26.4,73.4-29.1,113.9c-0.5,7.4-0.8,14.9-0.8,22.5 s0.3,15.1,0.8,22.5c2.8,40.4,12.9,78.8,29.1,113.9c6.8,14.7,14.6,28.7,23.4,42.1c26.6,40.4,62,74.5,103.4,99.7 c14.3,8.7,29.4,16.3,45,22.7V567.6h-45v88.2c-10.4-7.8-20.4-16.5-29.8-25.9c-13.7-13.7-25.7-28.5-36.1-44.2 c-7.7-11.6-14.4-23.7-20.2-36.2c-13.8-29.7-22.2-61.8-24.8-95c-0.6-7.4-0.9-15-0.9-22.5s0.3-15.1,0.9-22.5 c2.6-33.2,11.1-65.3,24.8-95c5.8-12.5,12.5-24.6,20.2-36.2c10.4-15.8,22.5-30.6,36.1-44.2c9.4-9.4,19.3-18,29.8-25.9v88.2h45V131.2 c-15.6,6.4-30.7,14-45,22.7C222.3,179,186.9,213.1,160.3,253.6z"/>
