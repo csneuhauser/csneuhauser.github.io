@@ -47,7 +47,7 @@
   "image": "https://schuylerneuhauser.com/headshot.jpg",
   "jobTitle": "Finance Fellow",
   "description": "Historian by training, working in financial technology and on human-AI collaboration.",
-  "worksFor": { "@type": "Organization", "name": "Fleet Fellowship" },
+  "worksFor": { "@type": "Organization", "name": "Fleet AI" },
   "knowsAbout": ["History", "Financial technology", "Human-AI collaboration"],
   "sameAs": ["https://www.linkedin.com/in/schuylerneuhauser/"]
 }
@@ -339,8 +339,14 @@
   .pron:focus-visible .pron-word { opacity: 0; }
   .pron:hover .pron-ipa,
   .pron:focus-visible .pron-ipa { opacity: 1; }
-  /* it is focusable, so it must look focused */
-  .pron:focus-visible { box-shadow: 0 2px 0 0 var(--oxblood); }
+  /* it is focusable, so it must look focused — a 2px ring rather than a
+     thickened underline, which was too easy to miss next to the border
+     that is already there. Meets WCAG 2.4.11 / 1.4.11 at 5.66:1. */
+  .pron:focus-visible {
+    outline: 2px solid var(--oxblood);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
 
   .info-label {
     font-family: var(--font-text);
@@ -654,8 +660,27 @@
 
 </style>
 <noscript><style>
-  /* without JS the router cannot run, so show every page in sequence */
+  /* Without JS the router cannot run, so show every page in sequence — and
+     un-hide the section headings, or the seven sections run together with
+     no visible divisions at all. */
   .page { display: block !important; }
+  .page > h2.sr-only {
+    position: static;
+    width: auto; height: auto;
+    margin: 3.5rem 0 0;
+    padding: 1.4rem 0 0;
+    border-top: 2px solid var(--oak);
+    clip: auto;
+    clip-path: none;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--oak);
+  }
+  .page:first-of-type > h2.sr-only { margin-top: 1.5rem; }
+  .nav { display: none; }
 </style></noscript>
 </head>
 <body>
@@ -695,7 +720,7 @@
               <img src="headshot.jpg" alt="C. Schuyler Neuhauser" width="150" height="150" />
             </div>
             <div class="intro-links">
-              <a href="https://www.linkedin.com/in/schuylerneuhauser/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://www.linkedin.com/in/schuylerneuhauser/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
               <a class="email-link" data-u="cschuylerneuhauser" data-d="gmail" data-t="com" href="#" rel="nofollow">cschuylerneuhauser [at] gmail [dot] com</a>
             </div>
           </div>
@@ -717,7 +742,7 @@
     <h2 id="h-experience" class="sr-only">Experience</h2>
     <div class="page-body">
 
-      <ol class="timeline">
+      <ol class="timeline" role="list">
 
         <li class="tl-item is-current">
           <h3 class="tl-org">Fleet Fellowship</h3>
@@ -725,7 +750,7 @@
             <div class="tl-role">Finance Fellow</div>
             <div class="tl-date">March 2026 &ndash; Present</div>
           </div>
-          <ul class="tl-notes">
+          <ul class="tl-notes" role="list">
             <li>
               Shaping the systems at the forefront of human&ndash;AI collaboration by helping to
               build simulation environments for AI agents.
@@ -778,13 +803,13 @@
         </div>
         <div class="entry-body-wrap">
           <div class="entry-body"><div class="entry-body-inner">
-            <ol class="proj-list">
+            <ol class="proj-list" role="list">
               <li>
                 Custom historic walking tour web app for a non-profit organization
                 <em>[coming soon…]</em>
               </li>
               <li>
-                <a href="https://shelbycneuhauser.com" target="_blank" rel="noopener noreferrer">Personal Website: Shelby Neuhauser</a>
+                <a href="https://shelbycneuhauser.com" target="_blank" rel="noopener noreferrer">Personal Website: Shelby Neuhauser<span class="sr-only"> (opens in a new tab)</span></a>
                 — AI-assisted development of a personal and academic website for my wife,
                 Shelby Neuhauser (historian, author, PhD candidate, former NFL cheerleader).
               </li>
@@ -801,7 +826,7 @@
         </div>
         <div class="entry-body-wrap">
           <div class="entry-body"><div class="entry-body-inner">
-            <ol class="proj-list">
+            <ol class="proj-list" role="list">
                <li>
                 &ldquo;The Motherland Recalls: The Fall and Rise of the Kutaisi Glory Memorial&rdquo;
                 — conference paper presented at the 2021 Midwest Slavic Conference,
@@ -809,7 +834,7 @@
               </li>
               <li>
                 A sample of my local history work in Tuxedo Park, NY:
-                <a href="https://myemail.constantcontact.com/This-Week-at-St--Mary-s-in-Tuxedo.html?soid=1102583984812&amp;aid=HzVzje4GOcs" target="_blank" rel="noopener noreferrer">This Week at St. Mary's</a>.
+                <a href="https://myemail.constantcontact.com/This-Week-at-St--Mary-s-in-Tuxedo.html?soid=1102583984812&amp;aid=HzVzje4GOcs" target="_blank" rel="noopener noreferrer">This Week at St. Mary's<span class="sr-only"> (opens in a new tab)</span></a>.
               </li>
 
             </ol>
@@ -825,7 +850,7 @@
         <div class="entry-body-wrap">
           <div class="entry-body"><div class="entry-body-inner">
             My work with the Tuxedo Park Climate Smart Community Task Force:
-            <a href="https://www.tuxedopark-ny.gov/climate-smart-community-task-force/pages/inventory-greenhouse-gas-emissions-2018" target="_blank" rel="noopener noreferrer">Inventory of Greenhouse Gas Emissions, 2018</a>.
+            <a href="https://www.tuxedopark-ny.gov/climate-smart-community-task-force/pages/inventory-greenhouse-gas-emissions-2018" target="_blank" rel="noopener noreferrer">Inventory of Greenhouse Gas Emissions, 2018<span class="sr-only"> (opens in a new tab)</span></a>.
           </div></div>
         </div>
       </article>
@@ -846,7 +871,7 @@
         <div class="entry-body-wrap">
           <div class="entry-body"><div class="entry-body-inner">
             Shelby's and my episode on the <em>In Conversation with Tourists</em> podcast:
-            <a href="https://inconversationwithtourists.alitu.com/episode/9881a6cb-2813-4c55-a5c6-37ed849cbaf0" target="_blank" rel="noopener noreferrer">There's something magical about travel &amp; love</a>.
+            <a href="https://inconversationwithtourists.alitu.com/episode/9881a6cb-2813-4c55-a5c6-37ed849cbaf0" target="_blank" rel="noopener noreferrer">There's something magical about travel &amp; love<span class="sr-only"> (opens in a new tab)</span></a>.
           </div></div>
         </div>
       </article>
@@ -867,7 +892,7 @@
         <div class="entry-body-wrap">
           <div class="entry-body"><div class="entry-body-inner">
             2025 Shortlist, Rising Star of the Year — US FinTech Awards:
-            <a href="https://usfintechawards.com/2025-shortlist/" target="_blank" rel="noopener noreferrer">2025 US FinTech Awards shortlist</a>.
+            <a href="https://usfintechawards.com/2025-shortlist/" target="_blank" rel="noopener noreferrer">2025 US FinTech Awards shortlist<span class="sr-only"> (opens in a new tab)</span></a>.
           </div></div>
         </div>
       </article>
@@ -880,7 +905,7 @@
         <div class="entry-body-wrap">
           <div class="entry-body"><div class="entry-body-inner">
             National Winner, Wiki Loves Monuments 2021 in the United States:
-            <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2021_in_the_United_States/Winners" target="_blank" rel="noopener noreferrer">National Winners</a>.
+            <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2021_in_the_United_States/Winners" target="_blank" rel="noopener noreferrer">National Winners<span class="sr-only"> (opens in a new tab)</span></a>.
           </div></div>
         </div>
       </article>
@@ -900,7 +925,7 @@
         <div>
           <div class="info-label">LinkedIn</div>
           <div class="info-value">
-            <a href="https://www.linkedin.com/in/schuylerneuhauser/" target="_blank" rel="noopener noreferrer">/in/schuylerneuhauser</a>
+            <a href="https://www.linkedin.com/in/schuylerneuhauser/" target="_blank" rel="noopener noreferrer">/in/schuylerneuhauser<span class="sr-only"> (opens in a new tab)</span></a>
           </div>
         </div>
         <div>
@@ -931,9 +956,19 @@
           to the host of this site.
         </p>
         <p>
-          The company hosting this site keeps standard server access logs, which
-          typically record IP address, browser user-agent and the page requested.
-          I do not use those logs for tracking or profiling.
+          This site is hosted by <strong>HOSTING_PROVIDER</strong>, who keep standard
+          server access logs. These typically record IP address, browser user-agent,
+          the page requested and the time of the request. They exist so the host can
+          operate and secure the service; I have no separate access to them and do not
+          use them for tracking, profiling or analytics. Where the GDPR applies, the
+          lawful basis is legitimate interest (Article 6(1)(f)) in keeping the site
+          running and secure. Retention is set by the host and is typically a matter of
+          days; see RETENTION_LINK for their current policy.
+        </p>
+        <p>
+          The data controller for this site is C. Schuyler Neuhauser. You have the right
+          to request access to, correction of, or erasure of any personal data held about
+          you, and to complain to your local data protection authority.
         </p>
         <p>
           Links to LinkedIn and other external sites are governed by those sites&rsquo;
@@ -965,22 +1000,19 @@
 </div>
 
 <script>
-  // ── Email addresses: assembled only on interaction, to frustrate scrapers ──
+  // ── Email addresses ──
+  // Assembled from data-attributes at load. Simple HTML scrapers do not run
+  // JS, so the plain address never appears in the served source; everyone
+  // else — including keyboard and screen-reader users — gets a real, working
+  // mailto link with no interaction required.
   (function(){
     Array.prototype.forEach.call(document.querySelectorAll('.email-link'), function(a){
-      var built = false;
-      function build(){
-        if (built) return;
-        var addr = a.getAttribute('data-u') + '@' +
-                   a.getAttribute('data-d') + '.' +
-                   a.getAttribute('data-t');
-        a.href = 'mailto:' + addr;
-        a.textContent = addr;
-        built = true;
-      }
-      a.addEventListener('mouseenter', build);
-      a.addEventListener('focus', build);
-      a.addEventListener('click', build);
+      var addr = a.getAttribute('data-u') + '@' +
+                 a.getAttribute('data-d') + '.' +
+                 a.getAttribute('data-t');
+      a.href = 'mailto:' + addr;
+      a.textContent = addr;
+      a.removeAttribute('rel');
     });
   })();
 </script>
@@ -989,6 +1021,13 @@
   // ── Router: hash-driven page switching ──
   (function(){
     var PAGES  = ['about', 'experience', 'projects', 'media', 'recognition', 'contact', 'privacy'];
+    // Entries that live inside a page, so #photography opens Recognition
+    // and scrolls to it rather than silently doing nothing.
+    var ENTRIES = {
+      building: 'projects', history: 'projects', climate: 'projects',
+      podcasts: 'media',
+      fintech: 'recognition', photography: 'recognition'
+    };
     var LABELS = {
       about: 'About', experience: 'Experience', projects: 'Projects',
       media: 'Media', recognition: 'Recognition', contact: 'Contact', privacy: 'Privacy'
@@ -999,7 +1038,7 @@
     var links = document.querySelectorAll('.nav-link');
     var initial = true;
 
-    function show(name){
+    function show(name, scrollTo){
       if (PAGES.indexOf(name) === -1) name = 'about';
 
       Array.prototype.forEach.call(pages, function(p){
@@ -1026,21 +1065,34 @@
         window.scrollTo(0, 0);
       }
       initial = false;
+
+      // Deep link to an entry: scroll to it now that its page is visible.
+      if (scrollTo) {
+        var target = document.getElementById(scrollTo);
+        if (target) {
+          if (target.scrollIntoView) { target.scrollIntoView(); }
+          if (target.hasAttribute('tabindex') === false) { target.setAttribute('tabindex', '-1'); }
+          if (target.focus) { target.focus({ preventScroll: true }); }
+        }
+      }
     }
 
     function fromHash(){
       return (window.location.hash || '').replace('#', '').toLowerCase();
     }
 
-    window.addEventListener('hashchange', function(){
-      var h = fromHash();
-      // Ignore hashes that aren't pages (e.g. #main from the skip link, or a
-      // deep link to an entry) so they don't bounce the reader back to About.
-      if (h && PAGES.indexOf(h) === -1) return;
-      show(h);
-    });
+    function route(h){
+      if (PAGES.indexOf(h) !== -1) { show(h); return; }
+      // A deep link to an entry: open the page that contains it.
+      if (Object.prototype.hasOwnProperty.call(ENTRIES, h)) { show(ENTRIES[h], h); return; }
+      // Anything else (e.g. #main from the skip link) is not ours to handle.
+      if (h) return;
+      show('');
+    }
 
-    show(fromHash());
+    window.addEventListener('hashchange', function(){ route(fromHash()); });
+
+    route(fromHash());
   })();
 </script>
 

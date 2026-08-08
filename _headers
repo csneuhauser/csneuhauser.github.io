@@ -1,12 +1,13 @@
 # ══════════════════════════════════════════════════════════════════════
 #  Security response headers
 #
-#  This file format is read automatically by Netlify and Cloudflare Pages.
-#  Drop it in the root of the deployed site — no configuration needed.
+#  Read automatically by Netlify and Cloudflare Pages. Drop it in the
+#  root of the deployed site — no configuration needed.
 #
-#  GitHub Pages does NOT support custom headers. If you host there, either
-#  put Cloudflare in front of the domain and set these as Transform Rules,
-#  or move to Netlify / Cloudflare Pages (both free for a site this size).
+#  GitHub Pages does NOT support custom headers. If you host there, none
+#  of this file takes effect: either put Cloudflare in front of the
+#  domain and set these as Transform Rules, or deploy to Netlify /
+#  Cloudflare Pages (both free at this size).
 #
 #  Verify after deploying:  https://securityheaders.com
 # ══════════════════════════════════════════════════════════════════════
@@ -24,22 +25,35 @@
   # cross-origin. Keeps referrers useful without leaking paths outward.
   Referrer-Policy: strict-origin-when-cross-origin
 
-  # Nobody can frame this site (clickjacking).
+  # Nobody can frame this site (clickjacking). Redundant with the
+  # frame-ancestors directive below, kept for very old browsers.
   X-Frame-Options: DENY
 
   # Turn off device APIs this site has no use for.
-  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), midi=(), serial=(), bluetooth=(), display-capture=()
 
-  # Everything loads from this origin and nowhere else. Because the fonts
-  # are now self-hosted there is no third-party origin to allow at all.
+  # Isolate the browsing context from anything that opens or embeds it.
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+
+  # Everything loads from this origin and nowhere else. The fonts are
+  # self-hosted, so there is no third-party origin to allow at all.
   #
-  # 'unsafe-inline' is present because the stylesheet and the three scripts
-  # live inline in index.html, which keeps the site a single portable file.
-  # The trade-off is acceptable here: there is no user input anywhere on the
-  # site, so there is no injection path for an attacker to exploit. If you
-  # later split the CSS and JS into their own files, delete both
-  # 'unsafe-inline' tokens below for a materially stricter policy.
+  # 'unsafe-inline' is present because the stylesheet and the scripts live
+  # inline in index.html, which keeps the site a single portable file. The
+  # trade-off is acceptable here: there is no user input anywhere on the
+  # site, so there is no route by which an attacker could inject a script
+  # in the first place. If you ever move the CSS and JS into their own
+  # .css and .js files, delete both 'unsafe-inline' tokens below and the
+  # policy becomes materially stricter at no maintenance cost.
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# HTML changes; always revalidate it.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
 
 # Fonts are content-addressed by name and never change — cache them hard.
 /fonts/*
