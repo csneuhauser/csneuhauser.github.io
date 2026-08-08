@@ -11,8 +11,16 @@
 
    Each family ships a `latin` and a `latin-ext` cut. The unicode-range
    descriptors let the browser download only the cut a page needs.
-   latin-ext carries the IPA glyphs (ˈ ɪ ə) used by the pronunciation
-   widget, so it is required, not optional.
+
+   IPA coverage (pronunciation widget, /ˈskaɪlər/):
+     ə  U+0259  present in the latin-ext cut of both families
+     ˈ  U+02C8  NOT present in any shipped cut — falls back to a system font
+     ɪ  U+026A  NOT present in any shipped cut — falls back to a system font
+   The two missing characters render in whatever the OS substitutes. This is
+   cosmetic only, and affects two glyphs at small size. Fontsource's subsets
+   simply do not include them; adding them would mean subsetting the full
+   upstream fonts by hand. latin-ext is still required — it carries the
+   schwa, plus accented Latin throughout.
    ═══════════════════════════════════════════════════════════════════ */
 
 /* ── Archivo — latin ── */
