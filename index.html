@@ -1,379 +1,1093 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C. Schuyler Neuhauser</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#243748">
+
+<title>C. Schuyler Neuhauser — About</title>
+<meta name="description" content="C. Schuyler Neuhauser — historian by training, working in financial technology and on human–AI collaboration.">
+<meta name="author" content="C. Schuyler Neuhauser">
+
+<!-- Canonical domain: schuylerneuhauser.com -->
+<link rel="canonical" href="https://schuylerneuhauser.com/">
+
+<!-- Link previews (LinkedIn, Slack, iMessage, X) -->
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="C. Schuyler Neuhauser">
+<meta property="og:title" content="C. Schuyler Neuhauser">
+<meta property="og:description" content="Historian by training, working in financial technology and on human–AI collaboration.">
+<meta property="og:url" content="https://schuylerneuhauser.com/">
+<meta property="og:image" content="https://schuylerneuhauser.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="C. Schuyler Neuhauser">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="C. Schuyler Neuhauser">
+<meta name="twitter:description" content="Historian by training, working in financial technology and on human–AI collaboration.">
+<meta name="twitter:image" content="https://schuylerneuhauser.com/og-image.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- Self-hosted webfonts: no third-party request, no visitor IP leaves the site -->
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/archivo-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "C. Schuyler Neuhauser",
+  "alternateName": "Schuyler Neuhauser",
+  "url": "https://schuylerneuhauser.com/",
+  "image": "https://schuylerneuhauser.com/headshot.jpg",
+  "jobTitle": "Finance Fellow",
+  "description": "Historian by training, working in financial technology and on human-AI collaboration.",
+  "worksFor": { "@type": "Organization", "name": "Fleet Fellowship" },
+  "knowsAbout": ["History", "Financial technology", "Human-AI collaboration"],
+  "sameAs": ["https://www.linkedin.com/in/schuylerneuhauser/"]
+}
+</script>
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #0d0f12;
-    --paper: #f5f2ec;
-    --gold: #b8974a;
-    --gold-light: #d4b06a;
-    --muted: #7a7570;
-    --rule: rgba(184,151,74,0.25);
+    --font-display: 'Archivo', system-ui, sans-serif;
+    --font-text: 'IBM Plex Sans', system-ui, sans-serif;
+    /* ── Atlantic Coast palette (from the quarterly) ──
+       Ratios are against --paper; all text pairs meet WCAG AA. */
+    --oak: #1b2733;          /* weathered navy — primary ink        13.89:1 */
+    --chestnut: #4a5a68;     /* slate — mid body text                6.51:1 */
+    --tobacco: #636b67;      /* muted grey-green accent              5.02:1 */
+    --oxblood: #9c4a32;      /* rust — the single warm accent        5.59:1 */
+    --navy: #243748;         /* deep navy — top line & Schuyler     11.22:1 */
+    --paper: #f4f5f6;        /* cool near-white */
+    --paper-deep: #e8eaec;
+    --muted: #636b67;
+    --rule: rgba(36,55,72,0.18);        /* hairlines — decorative */
+    --rule-strong: rgba(36,55,72,0.4);  /* structural rules — decorative */
+    --underline: rgba(36,55,72,0.60);   /* link underlines — 3.55:1, meets WCAG 1.4.11 */
   }
 
-  html {
-    background: var(--paper);
-    height: 100%;
-  }
+  html { background: var(--paper); height: 100%; }
 
   body {
-    font-family: 'DM Mono', monospace;
+    font-family: var(--font-text);
     min-height: 100vh;
+    min-height: 100dvh;
+    /* Load-bearing: the pronunciation widget's absolutely-positioned IPA
+       layer sits outside its box while hidden. Removing this can produce a
+       horizontal scrollbar on narrow screens. */
     overflow-x: hidden;
-    overflow-y: auto;
     background: var(--paper);
+    color: var(--oak);
+    -webkit-font-smoothing: antialiased;
   }
+
+  /* Visually hidden, but read aloud by screen readers */
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Skip link — first in the tab order, invisible until focused */
+  .skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: -4rem;
+    z-index: 10;
+    padding: 0.6rem 1rem;
+    background: var(--oak);
+    color: var(--paper);
+    font-family: var(--font-text);
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 0.5rem; }
+
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { to { opacity: 1; } }
+  @keyframes drawWidth { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── Narkomfin ribbon: warm band edge to edge ── */
+  .ribbon-top { height: 3px; background: var(--navy); width: 100%; }
 
   .card {
     position: relative;
-    z-index: 1;
     width: 100%;
-    max-width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
     min-height: 100vh;
+    min-height: 100dvh;
+    padding: 0 5rem;
+    opacity: 0;
+    transform: translateY(16px);
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+  }
+
+  /* ── Masthead ── */
+  .masthead {
+    padding: 4rem 0 0;
+    position: relative;
+    text-align: left;            /* quarterly: left-aligned masthead */
+    opacity: 0;
+    animation: fadeIn 0.7s ease 0.4s forwards;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-size: 3.1rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.04;
+    color: var(--oak);
+  }
+  .name em { font-style: normal; font-weight: 500; color: var(--navy); }
+
+  /* the Narkomfin closing bar — but warm, double-ruled like a diploma */
+  .masthead-bar {
+    margin: 1.8rem 0 0;
+    width: 100%;
+    height: 1px;
+    background: var(--oak);
+    transform-origin: left;
+    animation: drawWidth 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+  }
+
+  /* ── Menu bar: navigation ── */
+  .masthead-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 0 2.5rem;
+    margin-top: 0.95rem;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1.9rem;
+  }
+  .nav-link {
+    position: relative;
+    display: inline-block;
+    font-family: var(--font-text);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    color: var(--tobacco);
+    padding-bottom: 0.85rem;
+    transition: color 0.25s;
+  }
+  .nav-link .nav-link-text { display: inline-block; margin-right: 0; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -1px;
+    height: 1.5px;
+    background: var(--oxblood);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .nav-link:hover { color: var(--oak); }
+  .nav-link.is-active { color: var(--oak); }
+  .nav-link.is-active::after { transform: scaleX(1); }
+
+  /* ── Pages ── */
+  .page { display: none; }
+  .page.is-active {
+    display: block;
+    animation: pageIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+  /* focused programmatically on route change — never draw a ring on it */
+  .page:focus, main:focus { outline: none; }
+
+  /* ── About: rail + intro ── */
+  .layout { padding: 3rem 0 0; }
+
+  /* single-column pages */
+  .page-body {
+    padding: 3rem 0 0;
+    max-width: 760px;
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .intro-photo-col {
     display: flex;
     flex-direction: column;
-    background: var(--paper);
-    border: none;
-    opacity: 0;
-    transform: translateY(18px);
-    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
-    overflow: visible;
+    gap: 0.7rem;
   }
-
-
-
-  @keyframes rise {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── Hero ── */
-  .card-hero {
-    padding: 4rem 5rem 1.75rem;
-    flex-shrink: 0;
-    background: var(--paper);
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  /* ── Body ── */
-  .card-body {
-    flex: 1;
-    padding: 1.75rem 5rem 0;
-    overflow-y: visible;
-  }
-
-  /* Top rule */
-  .rule-top {
-    width: 32px;
-    height: 1px;
-    background: var(--gold);
-    margin-bottom: 2.5rem;
-    opacity: 0;
-    animation: fadeIn 0.6s ease 0.7s forwards;
-  }
-
-  /* Name */
-  .name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.75rem;
-    font-weight: 300;
-    letter-spacing: 0.01em;
-    line-height: 1;
-    color: var(--ink);
-    opacity: 0;
-    animation: fadeIn 0.7s ease 0.5s forwards;
-  }
-
-  .name em {
-    font-style: italic;
-    color: var(--gold);
-  }
-
-  /* Collapsible sections */
-  .sections {
-    margin-top: 1.75rem;
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeIn 0.8s ease 0.75s forwards;
-  }
-
-  .section-item { border-top: 1px solid var(--rule); }
-  .section-item:last-child { border-bottom: 1px solid var(--rule); }
-
-  .section-toggle {
-    width: 100%;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.85rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: #7a5e1e;
-    transition: color 0.2s;
-    text-align: left;
-  }
-
-  .section-toggle:hover { color: var(--gold); }
-  .section-toggle:hover .section-chevron { border-color: var(--gold-light); }
-
-  .section-chevron {
-    width: 8px;
-    height: 8px;
-    border-right: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    transform: rotate(45deg);
-    transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
-    flex-shrink: 0;
-    margin-left: 1rem;
-    position: relative;
-    top: -2px;
-  }
-
-  .section-item.open .section-chevron {
-    transform: rotate(-135deg);
-    top: 2px;
-  }
-
-  .section-body {
-    max-height: 0;
+  .intro-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 4px;
     overflow: hidden;
-    transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
   }
-
-  .section-item.open .section-body { max-height: 120px; }
-
-  .section-content {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    color: var(--ink);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    line-height: 1.6;
-    padding-bottom: 1rem;
-  }
-
-  .section-content a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(184,151,74,0.3);
-    transition: color 0.2s, border-color 0.2s;
-    padding-bottom: 1px;
-  }
-
-  .section-content a:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-  }
-
-  /* Divider */
-  .divider {
+  .intro-photo img {
     width: 100%;
-    height: 1px;
-    background: var(--rule);
-    margin-bottom: 2rem;
-    opacity: 0;
-    animation: fadeIn 0.5s ease 0.8s forwards;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.60);
+  }
+  .intro-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    font-family: var(--font-text);
+    font-size: 0.82rem;
+  }
+  .intro-links a {
+    color: var(--chestnut);
+    text-decoration: none;
+    border-bottom: 1px solid var(--underline);
+    width: fit-content;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .intro-links a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+
+  .intro-text {
+    font-family: var(--font-text);
+    font-size: 1.06rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: -0.003em;
+    color: var(--chestnut);
+  }
+  .intro-name-line {
+    display: block;
+    margin-bottom: 0.55em;
   }
 
-  /* Info grid */
-  .info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.6rem 2rem;
-    opacity: 0;
-    animation: fadeIn 0.7s ease 0.9s forwards;
-    text-align: center;
+  /* ── The name that says itself ──
+     "Schuyler" widens and cross-fades into its pronunciation on hover OR
+     keyboard focus. Width is animated from measured px values (set by JS in
+     --pron-w / --pron-i); clip-path is used instead of overflow:hidden so the
+     inline baseline is left undisturbed. Screen readers get the pronunciation
+     from the .sr-only span instead of the visual layer. */
+  .pron {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: baseline;
+    width: var(--pron-w, auto);
+    color: var(--oak);
+    border-bottom: 1px solid var(--underline);
+    cursor: help;
+    clip-path: inset(-0.7em 0 -0.7em 0);
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                color 0.35s ease,
+                border-color 0.35s ease;
   }
+  .pron-word,
+  .pron-ipa {
+    display: inline-block;
+    transition: opacity 0.35s ease;
+  }
+  .pron-ipa {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    font-size: 0.92em;
+    letter-spacing: 0.01em;
+  }
+  .pron-ipa .pron-ipa-label {
+    font-family: var(--font-text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.86em;
+    color: var(--tobacco);
+  }
+  .pron:hover,
+  .pron:focus-visible {
+    color: var(--oxblood);
+    border-color: var(--oxblood);
+    width: var(--pron-i, auto);
+    outline: none;
+  }
+  .pron:hover .pron-word,
+  .pron:focus-visible .pron-word { opacity: 0; }
+  .pron:hover .pron-ipa,
+  .pron:focus-visible .pron-ipa { opacity: 1; }
+  /* it is focusable, so it must look focused */
+  .pron:focus-visible { box-shadow: 0 2px 0 0 var(--oxblood); }
 
   .info-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.14em;
+    font-family: var(--font-text);
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.3rem;
-    font-weight: 400;
-  }
-
-  .info-value {
     font-size: 0.72rem;
-    color: var(--ink);
-    font-weight: 300;
-    letter-spacing: 0.02em;
-    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    color: var(--oxblood);
+    margin-bottom: 0.2rem;
+    margin-top: 1.1rem;
   }
-
+  .info-value { font-size: 0.95rem; color: var(--oak); font-weight: 400; line-height: 1.4; }
   .info-value a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(184,151,74,0.3);
-    transition: color 0.2s, border-color 0.2s;
-    padding-bottom: 1px;
+    color: var(--oak); text-decoration: none;
+    border-bottom: 1px solid var(--underline); transition: color 0.2s, border-color 0.2s;
   }
+  .info-value a:hover { color: var(--oxblood); border-color: var(--oxblood); }
 
-  .info-value a:hover {
-    color: var(--gold);
-    border-color: var(--gold);
+  /* ── Section entries ── */
+  .entry {
+    position: relative;
+    border-top: 1px solid var(--rule-strong);
   }
+  .entry:first-child { border-top: none; }
 
-  /* Footer */
-  .footer {
-    margin-top: 2.5rem;
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
-    border-top: 1px solid var(--rule);
-    font-size: 0.55rem;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 0.7s ease 1.1s forwards;
+  /* Heading row: numeral · title. The numeral is a tabular index rather than
+     a display figure, so the title carries the hierarchy. */
+  .entry-head {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 0 1.1rem;
+    align-items: baseline;
+    width: 100%;
+    padding: 1.75rem 0 0.95rem;
+    text-align: left;
   }
+  .entry:first-child .entry-head { padding-top: 0.2rem; }
 
-  /* Monogram watermark */
-  .monogram {
-    position: absolute;
-    bottom: 2rem;
-    right: 3rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 4.5rem;
-    font-weight: 300;
-    font-style: italic;
-    color: rgba(184,151,74,0.07);
+  .entry-num {
+    font-family: var(--font-text);
+    font-size: 0.72rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
     line-height: 1;
-    pointer-events: none;
+    color: var(--oxblood);
+    padding-top: 0;
     user-select: none;
-    letter-spacing: -0.02em;
-    z-index: 0;
   }
 
-  @keyframes fadeIn {
-    to { opacity: 1; }
+  .entry-title {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--oak);
   }
 
-  .info-item.full { grid-column: 1 / -1; }
+  .entry-body-wrap { padding-left: 3.5rem; }
 
-  @media (max-width: 480px) {
-    .card-hero { padding: 2.5rem 2rem 1.5rem; }
-    .card-body { padding: 0 2rem 2rem; }
+  .entry-body {
+    font-family: var(--font-text);
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--chestnut);
+  }
+  .entry-body-inner { padding: 0 0 1.6rem; }
+  .entry-body a {
+    color: var(--oak); text-decoration: none;
+    border-bottom: 1px solid var(--underline);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .entry-body a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+
+  .proj-list { list-style: none; }
+  .proj-list li { position: relative; padding-left: 1.35rem; margin-bottom: 0.9rem; }
+  .proj-list li:last-child { margin-bottom: 0; }
+
+  /* A square tick suits grotesque type better than a letterpress fleuron */
+  .proj-list li::before,
+  .tl-notes li::before {
+    content: '';
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--oxblood);
+    border-radius: 1px;
+  }
+
+  /* ── Work History: vertical timeline ── */
+  .timeline {
+    list-style: none;
+    position: relative;
+    padding-left: 2.2rem;
+    max-width: 640px;
+  }
+  /* the engraved spine */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 0.7rem;
+    bottom: 0.7rem;
+    width: 1px;
+    background: var(--rule-strong);
+  }
+
+  .tl-item { position: relative; padding-bottom: 2.7rem; }
+  .tl-item:last-child { padding-bottom: 0; }
+
+  /* node on the spine, one per employer */
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -2.2rem;
+    top: 0.42rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--tobacco);
+  }
+  .tl-item.is-current::before { background: var(--oxblood); border-color: var(--oxblood); }
+
+  .tl-org {
+    font-family: var(--font-display);
+    font-size: 1.02rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    text-transform: none;
+    color: var(--oak);
+  }
+
+  .tl-stint { position: relative; margin-top: 0.55rem; }
+  /* secondary node, only where one employer holds more than one title */
+  .tl-item.has-many .tl-stint::before {
+    content: '';
+    position: absolute;
+    left: calc(-2.2rem + 2px);
+    top: 0.62rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--rule-strong);
+  }
+
+  .tl-role {
+    font-family: var(--font-text);
+    font-size: 1rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5;
+    color: var(--chestnut);
+  }
+  .tl-date {
+    font-family: var(--font-text);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.11em;
+    font-variant-numeric: tabular-nums;
+    color: var(--tobacco);
+    margin-top: 0.25rem;
+  }
+
+  .tl-notes { list-style: none; margin-top: 0.8rem; }
+  .tl-notes li {
+    position: relative;
+    padding-left: 1.35rem;
+    margin-bottom: 0.7rem;
+    font-family: var(--font-text);
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--chestnut);
+  }
+  .tl-notes li:last-child { margin-bottom: 0; }
+
+  /* ── Contact ── */
+  .contact-lede {
+    font-family: var(--font-text);
+    font-size: 1.06rem;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: -0.003em;
+    color: var(--chestnut);
+    max-width: 34em;
+  }
+  .contact-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule-strong);
+    max-width: 620px;
+  }
+  .contact-list .info-label { margin-top: 0; }
+  .contact-list .info-value { font-size: 1rem; }
+
+  /* ── Privacy ── */
+  .prose {
+    font-family: var(--font-text);
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.65;
+    color: var(--chestnut);
+    max-width: 34em;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule-strong);
+  }
+  .prose p { margin-bottom: 1rem; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose a {
+    color: var(--oak); text-decoration: none;
+    border-bottom: 1px solid var(--underline);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .prose a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 3.5rem;
+    padding: 1.4rem 0 3rem;
+    border-top: 2px solid var(--oak);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: var(--font-text);
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    color: var(--muted);
+    opacity: 0;
+    animation: fadeIn 0.7s ease 1s forwards;
+  }
+  .footer a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--underline);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .footer a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+  .footer .monogram-mark {
+    display: inline-flex;
+    color: var(--oxblood);
+    opacity: 0.4;
+  }
+  .footer .monogram-mark svg {
+    width: 34px;
+    height: 34px;
+    display: block;
+  }
+
+  /* Visible keyboard focus — sans UI reads as interactive, so it
+     needs to behave that way for keyboard users too */
+  a:focus-visible {
+    outline: 2px solid var(--oxblood);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 760px) {
+    .card { padding: 0 1.75rem; }
     .name { font-size: 2.2rem; }
-    .info-grid { grid-template-columns: 1fr; }
-    .info-item.full { grid-column: auto; }
+    .masthead-foot { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
+    .nav { gap: 0.4rem 1.5rem; }
+    /* taller touch targets: ~40px instead of ~22px */
+    .nav-link { font-size: 0.86rem; padding-top: 0.9rem; padding-bottom: 0.5rem; }
+    .intro { grid-template-columns: 1fr; gap: 1.2rem; }
+    .layout { padding-top: 2rem; }
+    .page-body { padding-top: 2rem; }
+    .entry-head { grid-template-columns: 2rem 1fr; gap: 0 0.9rem; }
+    .entry-body-wrap { padding-left: 2.9rem; }
+    .timeline { padding-left: 1.7rem; }
+    .tl-item::before { left: -1.7rem; }
+    .tl-item.has-many .tl-stint::before { left: calc(-1.7rem + 2px); }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* ── Print: reveal every page, drop the interactive chrome ── */
+  @media print {
+    .page { display: block !important; }
+    .card { min-height: 0; padding: 0; opacity: 1; transform: none; animation: none; }
+    .masthead, .footer { opacity: 1; animation: none; }
+    .nav, .ribbon-top, .skip-link, .monogram-mark { display: none; }
+    .page-body, .layout { padding-top: 1.5rem; }
+    body { background: #fff; color: #000; }
+    .entry, .tl-item { break-inside: avoid; }
+    /* print the destination of every outbound link */
+    .entry-body a[href^="http"]::after,
+    .info-value a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+  }
+
 </style>
+<noscript><style>
+  /* without JS the router cannot run, so show every page in sequence */
+  .page { display: block !important; }
+</style></noscript>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="ribbon-top"></div>
 <div class="card">
 
-  <!-- Hero -->
-  <div class="card-hero">
-    <div class="rule-top"></div>
-    <h1 class="name">C. <em>Schuyler</em> Neuhauser</h1>
-  </div>
+  <!-- Masthead + menu bar -->
+  <header class="masthead">
+    <h1 class="name">C. Schuyler Neuhauser</h1>
+    <div class="masthead-bar"></div>
 
-  <!-- Content -->
-  <div class="card-body">
+    <div class="masthead-foot">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#about"       data-page="about"><span class="nav-link-text">About</span></a>
+        <a class="nav-link" href="#experience"  data-page="experience"><span class="nav-link-text">Experience</span></a>
+        <a class="nav-link" href="#projects"    data-page="projects"><span class="nav-link-text">Projects</span></a>
+        <a class="nav-link" href="#media"       data-page="media"><span class="nav-link-text">Media</span></a>
+        <a class="nav-link" href="#recognition" data-page="recognition"><span class="nav-link-text">Recognition</span></a>
+        <a class="nav-link" href="#contact"     data-page="contact"><span class="nav-link-text">Contact</span></a>
+      </nav>
+    </div>
+  </header>
 
-    <div class="sections">
+  <main id="main" tabindex="-1">
 
-      <div class="section-item" id="sec-history">
-        <button class="section-toggle" onclick="toggleSection('sec-history')" aria-expanded="false">
-          History
-          <span class="section-chevron"></span>
-        </button>
-        <div class="section-body">
-          <div class="section-content">
-            A sample of my local history work in Tuxedo Park, NY:
-            <a href="https://myemail.constantcontact.com/This-Week-at-St--Mary-s-in-Tuxedo.html?soid=1102583984812&aid=HzVzje4GOcs" target="_blank" rel="noopener noreferrer">This Week at St. Mary's</a>
+  <!-- ══════════ ABOUT ══════════ -->
+  <section class="page" id="about" data-page="about" tabindex="-1" aria-labelledby="h-about">
+    <h2 id="h-about" class="sr-only">About</h2>
+    <div class="layout">
+
+      <!-- Intro: headshot + description -->
+      <div class="about-main">
+        <div class="intro">
+          <div class="intro-photo-col">
+            <div class="intro-photo">
+              <img src="headshot.jpg" alt="C. Schuyler Neuhauser" width="150" height="150" />
+            </div>
+            <div class="intro-links">
+              <a href="https://www.linkedin.com/in/schuylerneuhauser/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a class="email-link" data-u="cschuylerneuhauser" data-d="gmail" data-t="com" href="#" rel="nofollow">cschuylerneuhauser [at] gmail [dot] com</a>
+            </div>
+          </div>
+          <div class="intro-text">
+            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true"><span class="pron-ipa-label">pronounced:</span> /ˈskaɪlər/ SKY-lər</span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
+            I am a historian by training with professional experience in the financial technology sector.
+            Most recently, I have been participating in a fellowship programme run by Fleet AI, an agentic AI startup,
+            and working on a variety of software development projects. I am increasingly curious about the
+            nature of human-AI collaboration and the role of the humanities in guiding future AI systems.
           </div>
         </div>
       </div>
 
-      <div class="section-item" id="sec-travel">
-        <button class="section-toggle" onclick="toggleSection('sec-travel')" aria-expanded="false">
-          Travel
-          <span class="section-chevron"></span>
-        </button>
-        <div class="section-body">
-          <div class="section-content">
-            Shelby's and my episode on the In Conversation with Tourists podcast:
-            <a href="https://inconversationwithtourists.alitu.com/episode/9881a6cb-2813-4c55-a5c6-37ed849cbaf0" target="_blank" rel="noopener noreferrer">❤️ There's something magical about travel &amp; love</a>
-          </div>
-        </div>
-      </div>
+    </div>
+  </section>
 
-      <div class="section-item" id="sec-climate">
-        <button class="section-toggle" onclick="toggleSection('sec-climate')" aria-expanded="false">
-          Climate
-          <span class="section-chevron"></span>
-        </button>
-        <div class="section-body">
-          <div class="section-content">
+  <!-- ══════════ EXPERIENCE ══════════ -->
+  <section class="page" id="experience" data-page="experience" tabindex="-1" aria-labelledby="h-experience">
+    <h2 id="h-experience" class="sr-only">Experience</h2>
+    <div class="page-body">
+
+      <ol class="timeline">
+
+        <li class="tl-item is-current">
+          <h3 class="tl-org">Fleet Fellowship</h3>
+          <div class="tl-stint">
+            <div class="tl-role">Finance Fellow</div>
+            <div class="tl-date">March 2026 &ndash; Present</div>
+          </div>
+          <ul class="tl-notes">
+            <li>
+              Shaping the systems at the forefront of human&ndash;AI collaboration by helping to
+              build simulation environments for AI agents.
+            </li>
+          </ul>
+        </li>
+
+        <li class="tl-item has-many">
+          <h3 class="tl-org">Raistone</h3>
+          <div class="tl-stint">
+            <div class="tl-role">AVP Alliances, Senior Broker &amp; Private Equity Manager</div>
+            <div class="tl-date">June 2025 &ndash; October 2025</div>
+          </div>
+          <div class="tl-stint">
+            <div class="tl-role">Associate, Alliances</div>
+            <div class="tl-date">December 2022 &ndash; June 2025</div>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <h3 class="tl-org">Middle East Institute</h3>
+          <div class="tl-stint">
+            <div class="tl-role">Research Assistant Internship</div>
+            <div class="tl-date">May 2021 &ndash; December 2021</div>
+          </div>
+        </li>
+
+        <li class="tl-item">
+          <h3 class="tl-org">Greensill</h3>
+          <div class="tl-stint">
+            <div class="tl-role">Analyst</div>
+            <div class="tl-date">July 2020 &ndash; March 2021</div>
+          </div>
+        </li>
+
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- ══════════ PROJECTS ══════════ -->
+  <section class="page" id="projects" data-page="projects" tabindex="-1" aria-labelledby="h-projects">
+    <h2 id="h-projects" class="sr-only">Projects</h2>
+    <div class="page-body">
+
+      <article class="entry" id="building">
+        <div class="entry-head">
+          <span class="entry-num">01</span>
+          <h3 class="entry-title">What I&rsquo;m Building</h3>
+        </div>
+        <div class="entry-body-wrap">
+          <div class="entry-body"><div class="entry-body-inner">
+            <ol class="proj-list">
+              <li>
+                Custom historic walking tour web app for a non-profit organization
+                <em>[coming soon…]</em>
+              </li>
+              <li>
+                <a href="https://shelbycneuhauser.com" target="_blank" rel="noopener noreferrer">Personal Website: Shelby Neuhauser</a>
+                — AI-assisted development of a personal and academic website for my wife,
+                Shelby Neuhauser (historian, author, PhD candidate, former NFL cheerleader).
+              </li>
+
+            </ol>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="entry" id="history">
+        <div class="entry-head">
+          <span class="entry-num">02</span>
+          <h3 class="entry-title">History</h3>
+        </div>
+        <div class="entry-body-wrap">
+          <div class="entry-body"><div class="entry-body-inner">
+            <ol class="proj-list">
+               <li>
+                &ldquo;The Motherland Recalls: The Fall and Rise of the Kutaisi Glory Memorial&rdquo;
+                — conference paper presented at the 2021 Midwest Slavic Conference,
+                hosted online by The Ohio State University.
+              </li>
+              <li>
+                A sample of my local history work in Tuxedo Park, NY:
+                <a href="https://myemail.constantcontact.com/This-Week-at-St--Mary-s-in-Tuxedo.html?soid=1102583984812&amp;aid=HzVzje4GOcs" target="_blank" rel="noopener noreferrer">This Week at St. Mary's</a>.
+              </li>
+
+            </ol>
+          </div></div>
+        </div>
+      </article>
+
+      <article class="entry" id="climate">
+        <div class="entry-head">
+          <span class="entry-num">03</span>
+          <h3 class="entry-title">Climate</h3>
+        </div>
+        <div class="entry-body-wrap">
+          <div class="entry-body"><div class="entry-body-inner">
             My work with the Tuxedo Park Climate Smart Community Task Force:
-            <a href="https://www.tuxedopark-ny.gov/climate-smart-community-task-force/pages/inventory-greenhouse-gas-emissions-2018" target="_blank" rel="noopener noreferrer">Inventory of Greenhouse Gas Emissions 2018</a>
+            <a href="https://www.tuxedopark-ny.gov/climate-smart-community-task-force/pages/inventory-greenhouse-gas-emissions-2018" target="_blank" rel="noopener noreferrer">Inventory of Greenhouse Gas Emissions, 2018</a>.
+          </div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══════════ MEDIA ══════════ -->
+  <section class="page" id="media" data-page="media" tabindex="-1" aria-labelledby="h-media">
+    <h2 id="h-media" class="sr-only">Media</h2>
+    <div class="page-body">
+
+      <article class="entry" id="podcasts">
+        <div class="entry-head">
+          <span class="entry-num">01</span>
+          <h3 class="entry-title">Podcasts</h3>
+        </div>
+        <div class="entry-body-wrap">
+          <div class="entry-body"><div class="entry-body-inner">
+            Shelby's and my episode on the <em>In Conversation with Tourists</em> podcast:
+            <a href="https://inconversationwithtourists.alitu.com/episode/9881a6cb-2813-4c55-a5c6-37ed849cbaf0" target="_blank" rel="noopener noreferrer">There's something magical about travel &amp; love</a>.
+          </div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══════════ RECOGNITION ══════════ -->
+  <section class="page" id="recognition" data-page="recognition" tabindex="-1" aria-labelledby="h-recognition">
+    <h2 id="h-recognition" class="sr-only">Recognition</h2>
+    <div class="page-body">
+
+      <article class="entry" id="fintech">
+        <div class="entry-head">
+          <span class="entry-num">01</span>
+          <h3 class="entry-title">FinTech</h3>
+        </div>
+        <div class="entry-body-wrap">
+          <div class="entry-body"><div class="entry-body-inner">
+            2025 Shortlist, Rising Star of the Year — US FinTech Awards:
+            <a href="https://usfintechawards.com/2025-shortlist/" target="_blank" rel="noopener noreferrer">2025 US FinTech Awards shortlist</a>.
+          </div></div>
+        </div>
+      </article>
+
+      <article class="entry" id="photography">
+        <div class="entry-head">
+          <span class="entry-num">02</span>
+          <h3 class="entry-title">Photography</h3>
+        </div>
+        <div class="entry-body-wrap">
+          <div class="entry-body"><div class="entry-body-inner">
+            National Winner, Wiki Loves Monuments 2021 in the United States:
+            <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2021_in_the_United_States/Winners" target="_blank" rel="noopener noreferrer">National Winners</a>.
+          </div></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACT ══════════ -->
+  <section class="page" id="contact" data-page="contact" tabindex="-1" aria-labelledby="h-contact">
+    <h2 id="h-contact" class="sr-only">Contact</h2>
+    <div class="page-body">
+      <p class="contact-lede">
+        The best ways to reach me.
+      </p>
+
+      <div class="contact-list">
+        <div>
+          <div class="info-label">LinkedIn</div>
+          <div class="info-value">
+            <a href="https://www.linkedin.com/in/schuylerneuhauser/" target="_blank" rel="noopener noreferrer">/in/schuylerneuhauser</a>
+          </div>
+        </div>
+        <div>
+          <div class="info-label">Email</div>
+          <div class="info-value">
+            <a class="email-link" data-u="cschuylerneuhauser" data-d="gmail" data-t="com" href="#" rel="nofollow">cschuylerneuhauser [at] gmail [dot] com</a>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="section-item" id="sec-photography">
-        <button class="section-toggle" onclick="toggleSection('sec-photography')" aria-expanded="false">
-          Photography
-          <span class="section-chevron"></span>
-        </button>
-        <div class="section-body">
-          <div class="section-content">
-            My winning entry for Wiki Loves Monuments 2021 in the United States:
-            <a href="https://commons.wikimedia.org/wiki/Commons:Wiki_Loves_Monuments_2021_in_the_United_States/Winners" target="_blank" rel="noopener noreferrer">National Winners</a>
-          </div>
-        </div>
+  <!-- ══════════ PRIVACY ══════════ -->
+  <section class="page" id="privacy" data-page="privacy" tabindex="-1" aria-labelledby="h-privacy">
+    <h2 id="h-privacy" class="sr-only">Privacy</h2>
+    <div class="page-body">
+      <p class="contact-lede">What this site does with your data.</p>
+
+      <div class="prose">
+        <p>
+          Nothing, essentially. This site sets no cookies, runs no analytics, embeds
+          no trackers and stores nothing in your browser. There are no forms, so there
+          is nothing for you to submit.
+        </p>
+        <p>
+          Typefaces are served from this site rather than from a third-party font
+          service, so loading a page does not send your IP address anywhere except
+          to the host of this site.
+        </p>
+        <p>
+          The company hosting this site keeps standard server access logs, which
+          typically record IP address, browser user-agent and the page requested.
+          I do not use those logs for tracking or profiling.
+        </p>
+        <p>
+          Links to LinkedIn and other external sites are governed by those sites&rsquo;
+          own privacy policies once you leave this one.
+        </p>
+        <p>
+          Questions, or want to know what is held about you? Write to me at
+          <a class="email-link" data-u="cschuylerneuhauser" data-d="gmail" data-t="com" href="#" rel="nofollow">cschuylerneuhauser [at] gmail [dot] com</a>.
+        </p>
+        <p>Last updated: August 2026.</p>
       </div>
     </div>
+  </section>
 
-    <div class="info-grid">
-      <div class="info-item">
-        <div class="info-label">Location</div>
-        <div class="info-value">Edinburgh, UK</div>
-      </div>
-      <div class="info-item">
-        <div class="info-label">LinkedIn</div>
-        <div class="info-value">
-          <a href="https://www.linkedin.com/in/schuylerneuhauser/" target="_blank" rel="noopener noreferrer">schuylerneuhauser</a>
-        </div>
-      </div>
-    </div>
+  </main>
 
-    <div class="footer">
-      &copy; 2026 C. Schuyler Neuhauser
-    </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <span>&copy; MMXXVI &middot; C. Schuyler Neuhauser &middot; <a href="#privacy">Privacy</a></span>
+    <span class="monogram-mark" aria-hidden="true">
+      <svg viewBox="0 0 864 864" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path fill="currentColor" d="M160.3,253.6c-8.8,13.4-16.6,27.4-23.4,42.1c-16.2,35-26.4,73.4-29.1,113.9c-0.5,7.4-0.8,14.9-0.8,22.5 s0.3,15.1,0.8,22.5c2.8,40.4,12.9,78.8,29.1,113.9c6.8,14.7,14.6,28.7,23.4,42.1c26.6,40.4,62,74.5,103.4,99.7 c14.3,8.7,29.4,16.3,45,22.7V567.6h-45v88.2c-10.4-7.8-20.4-16.5-29.8-25.9c-13.7-13.7-25.7-28.5-36.1-44.2 c-7.7-11.6-14.4-23.7-20.2-36.2c-13.8-29.7-22.2-61.8-24.8-95c-0.6-7.4-0.9-15-0.9-22.5s0.3-15.1,0.9-22.5 c2.6-33.2,11.1-65.3,24.8-95c5.8-12.5,12.5-24.6,20.2-36.2c10.4-15.8,22.5-30.6,36.1-44.2c9.4-9.4,19.3-18,29.8-25.9v88.2h45V131.2 c-15.6,6.4-30.7,14-45,22.7C222.3,179,186.9,213.1,160.3,253.6z"/>
+        <path fill="currentColor" d="M492.8,569.1l-0.4-1.4l-31-113.1l-1-3.8l-1.7-6.3l-6-21.9l-0.9-3.4l-2.6-9.5l-31-113.1L380,156.8l-8.8-32.3 l-3.1-11.2c-14.3,2.8-28.3,6.7-41.9,11.3v614.7c14.6,5,29.6,9,45,12V294.9l0.4,1.4l31,113.1l1,3.8l1.7,6.3l6,21.9l0.9,3.4l2.6,9.5 l31,113.1L484,707.2l8.8,32.3l3.1,11.2c14.3-2.8,28.3-6.7,41.9-11.3V124.7c-14.6-5-29.6-9-45-12V569.1z"/>
+        <path fill="currentColor" d="M600.2,341.1v-133c10.4,7.8,20.4,16.5,29.8,25.9c13.6,13.6,25.7,28.5,36.1,44.2c7.7,11.6,14.4,23.7,20.2,36.2 l40.8-18.8c-6.8-14.7-14.6-28.7-23.4-42.1c-26.6-40.4-62-74.6-103.4-99.7c-14.3-8.7-29.4-16.3-45-22.7v228.5 c132.8,132.8,14,14,146.8,146.8c-4,14.8-9.3,29.1-15.7,43c-5.8,12.5-12.5,24.6-20.2,36.2c-10.4,15.8-22.5,30.6-36.1,44.2 c-9.4,9.4-19.3,18-29.8,25.9v-88.2h-45v165.2c15.6-6.4,30.7-14,45-22.7c41.5-25.1,76.8-59.2,103.4-99.7 c8.8-13.4,16.6-27.4,23.4-42.1c9.1-19.7,16.3-40.4,21.3-61.9c1.1-4.7,2.1-9.4,3-14.2C742.1,482.9,606,346.9,600.2,341.1z"/>
+      </svg>
+    </span>
+  </footer>
 
-  </div><!-- /card-body -->
-
-  <div class="monogram">CSN</div>
 </div>
 
 <script>
-  function toggleSection(id) {
-    const item = document.getElementById(id);
-    const btn = item.querySelector('.section-toggle');
-    const isOpen = item.classList.contains('open');
-    item.classList.toggle('open', !isOpen);
-    btn.setAttribute('aria-expanded', String(!isOpen));
-  }
+  // ── Email addresses: assembled only on interaction, to frustrate scrapers ──
+  (function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.email-link'), function(a){
+      var built = false;
+      function build(){
+        if (built) return;
+        var addr = a.getAttribute('data-u') + '@' +
+                   a.getAttribute('data-d') + '.' +
+                   a.getAttribute('data-t');
+        a.href = 'mailto:' + addr;
+        a.textContent = addr;
+        built = true;
+      }
+      a.addEventListener('mouseenter', build);
+      a.addEventListener('focus', build);
+      a.addEventListener('click', build);
+    });
+  })();
+</script>
+
+<script>
+  // ── Router: hash-driven page switching ──
+  (function(){
+    var PAGES  = ['about', 'experience', 'projects', 'media', 'recognition', 'contact', 'privacy'];
+    var LABELS = {
+      about: 'About', experience: 'Experience', projects: 'Projects',
+      media: 'Media', recognition: 'Recognition', contact: 'Contact', privacy: 'Privacy'
+    };
+    var BASE_TITLE = 'C. Schuyler Neuhauser';
+
+    var pages = document.querySelectorAll('.page');
+    var links = document.querySelectorAll('.nav-link');
+    var initial = true;
+
+    function show(name){
+      if (PAGES.indexOf(name) === -1) name = 'about';
+
+      Array.prototype.forEach.call(pages, function(p){
+        p.classList.toggle('is-active', p.getAttribute('data-page') === name);
+      });
+      Array.prototype.forEach.call(links, function(l){
+        var on = l.getAttribute('data-page') === name;
+        l.classList.toggle('is-active', on);
+        if (on) { l.setAttribute('aria-current', 'page'); }
+        else { l.removeAttribute('aria-current'); }
+      });
+
+      // Each view is a distinct page as far as the reader is concerned, so give
+      // it a distinct title — for the tab, for history and for bookmarks.
+      document.title = BASE_TITLE + ' — ' + LABELS[name];
+
+      // On a route change, move focus into the new section and reset scroll.
+      // Without this a screen reader announces nothing and a keyboard user has
+      // to tab back through the whole nav. Skipped on first paint so we don't
+      // steal focus from someone who has just arrived.
+      if (!initial) {
+        var el = document.getElementById(name);
+        if (el && el.focus) { el.focus({ preventScroll: true }); }
+        window.scrollTo(0, 0);
+      }
+      initial = false;
+    }
+
+    function fromHash(){
+      return (window.location.hash || '').replace('#', '').toLowerCase();
+    }
+
+    window.addEventListener('hashchange', function(){
+      var h = fromHash();
+      // Ignore hashes that aren't pages (e.g. #main from the skip link, or a
+      // deep link to an entry) so they don't bounce the reader back to About.
+      if (h && PAGES.indexOf(h) === -1) return;
+      show(h);
+    });
+
+    show(fromHash());
+  })();
+</script>
+
+<script>
+  // ── "Schuyler" → pronunciation: measure both states so the width can
+  //    be animated between two exact pixel values. ──
+  (function(){
+    var els = Array.prototype.slice.call(document.querySelectorAll('.pron'));
+    if (!els.length) return;
+
+    function measure(){
+      els.forEach(function(el){
+        // Skip if the element's page is hidden — it would measure as 0px wide.
+        if (!el.offsetParent) return;
+        var word = el.querySelector('.pron-word');
+        var ipa  = el.querySelector('.pron-ipa');
+        if (!word || !ipa) return;
+        var prev = el.style.transition;
+        el.style.transition = 'none';
+        el.style.width = 'auto';
+        var w = word.getBoundingClientRect().width;
+        var i = ipa.getBoundingClientRect().width;
+        el.style.width = '';
+        if (!w || !i) { el.style.transition = prev; return; }
+        el.style.setProperty('--pron-w', w.toFixed(2) + 'px');
+        el.style.setProperty('--pron-i', i.toFixed(2) + 'px');
+        void el.offsetWidth;               // flush before restoring transition
+        el.style.transition = prev;
+      });
+    }
+
+    measure();
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(measure); }
+    window.addEventListener('load', measure);
+
+    // Measure when a page becomes visible — covers arriving at About via the
+    // nav, or landing on the site with a non-About hash in the URL.
+    window.addEventListener('hashchange', function(){
+      requestAnimationFrame(measure);
+    });
+
+    var t;
+    window.addEventListener('resize', function(){
+      clearTimeout(t);
+      t = setTimeout(measure, 150);
+    });
+  })();
 </script>
 </body>
 </html>

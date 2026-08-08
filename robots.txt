@@ -1,0 +1,5 @@
+# Allow everything.
+User-agent: *
+Allow: /
+
+Sitemap: https://schuylerneuhauser.com/sitemap.xml

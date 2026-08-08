@@ -1,0 +1,49 @@
+# ══════════════════════════════════════════════════════════════════════
+#  Security response headers
+#
+#  This file format is read automatically by Netlify and Cloudflare Pages.
+#  Drop it in the root of the deployed site — no configuration needed.
+#
+#  GitHub Pages does NOT support custom headers. If you host there, either
+#  put Cloudflare in front of the domain and set these as Transform Rules,
+#  or move to Netlify / Cloudflare Pages (both free for a site this size).
+#
+#  Verify after deploying:  https://securityheaders.com
+# ══════════════════════════════════════════════════════════════════════
+
+/*
+  # Force HTTPS for a year, including subdomains.
+  # Only enable this once HTTPS is definitely working — it is sticky and
+  # browsers will refuse plain HTTP for the whole max-age.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+  # Stop browsers guessing a file's type from its contents.
+  X-Content-Type-Options: nosniff
+
+  # Send the full URL to same-origin destinations, only the bare origin
+  # cross-origin. Keeps referrers useful without leaking paths outward.
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Nobody can frame this site (clickjacking).
+  X-Frame-Options: DENY
+
+  # Turn off device APIs this site has no use for.
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()
+
+  # Everything loads from this origin and nowhere else. Because the fonts
+  # are now self-hosted there is no third-party origin to allow at all.
+  #
+  # 'unsafe-inline' is present because the stylesheet and the three scripts
+  # live inline in index.html, which keeps the site a single portable file.
+  # The trade-off is acceptable here: there is no user input anywhere on the
+  # site, so there is no injection path for an attacker to exploit. If you
+  # later split the CSS and JS into their own files, delete both
+  # 'unsafe-inline' tokens below for a materially stricter policy.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# Fonts are content-addressed by name and never change — cache them hard.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable

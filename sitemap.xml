@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Canonical domain: schuylerneuhauser.com
+     The site is a single document; the hash routes are not separate URLs
+     as far as a crawler is concerned, so there is one entry. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://schuylerneuhauser.com/</loc>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
