@@ -319,17 +319,16 @@
     top: 0;
     opacity: 0;
   }
-  /* Only the IPA itself is set apart typographically — "Schuyler, pronounced:"
-     inherits the surrounding prose font and size so it matches the word it
-     replaces exactly. */
+  /* Only the IPA itself is set apart — "Schuyler, pronounced" inherits the
+     surrounding prose font, size and color so it matches the word it
+     replaces exactly; the oxblood is reserved for the transcription. */
   .pron-ipa .pron-ipa-text {
     font-size: 0.92em;
     letter-spacing: 0.01em;
+    color: var(--oxblood);
   }
   .pron:focus-visible,
   .pron.is-open {
-    color: var(--oxblood);
-    border-color: var(--oxblood);
     width: var(--pron-i, auto);
     outline: none;
   }
@@ -342,8 +341,6 @@
      off. Touch devices use the .is-open class toggled in JS instead. */
   @media (hover: hover) and (pointer: fine) {
     .pron:hover {
-      color: var(--oxblood);
-      border-color: var(--oxblood);
       width: var(--pron-i, auto);
     }
     .pron:hover .pron-word { opacity: 0; }
@@ -735,7 +732,7 @@
             </div>
           </div>
           <div class="intro-text">
-            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true">Schuyler, pronounced: <span class="pron-ipa-text">/ˈskaɪlər/ SKY-lər</span></span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
+            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true">Schuyler, pronounced <span class="pron-ipa-text">/ˈskaɪlər/ SKY-lər</span></span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
             I am a historian by training with professional experience in the financial technology sector.
             Most recently, I have been participating in a fellowship program run by Fleet AI, an agentic AI startup,
             and working on a variety of software development projects. I am increasingly curious about the
