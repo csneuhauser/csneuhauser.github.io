@@ -63,7 +63,7 @@
        Ratios are against --paper; all text pairs meet WCAG AA. */
     --oak: #1b2733;          /* weathered navy — primary ink        13.89:1 */
     --chestnut: #4a5a68;     /* slate — mid body text                6.51:1 */
-    --tobacco: #636b67;      /* muted grey-green accent              5.02:1 */
+    --tobacco: #636b67;      /* muted gray-green accent              5.02:1 */
     --oxblood: #9c4a32;      /* rust — the single warm accent        5.59:1 */
     --navy: #243748;         /* deep navy — top line & Schuyler     11.22:1 */
     --paper: #f4f5f6;        /* cool near-white */
@@ -318,27 +318,37 @@
     left: 0;
     top: 0;
     opacity: 0;
+  }
+  /* Only the IPA itself is set apart typographically — "Schuyler, pronounced:"
+     inherits the surrounding prose font and size so it matches the word it
+     replaces exactly. */
+  .pron-ipa .pron-ipa-text {
     font-size: 0.92em;
     letter-spacing: 0.01em;
   }
-  .pron-ipa .pron-ipa-label {
-    font-family: var(--font-text);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.86em;
-    color: var(--tobacco);
-  }
-  .pron:hover,
-  .pron:focus-visible {
+  .pron:focus-visible,
+  .pron.is-open {
     color: var(--oxblood);
     border-color: var(--oxblood);
     width: var(--pron-i, auto);
     outline: none;
   }
-  .pron:hover .pron-word,
-  .pron:focus-visible .pron-word { opacity: 0; }
-  .pron:hover .pron-ipa,
-  .pron:focus-visible .pron-ipa { opacity: 1; }
+  .pron:focus-visible .pron-word,
+  .pron.is-open .pron-word { opacity: 0; }
+  .pron:focus-visible .pron-ipa,
+  .pron.is-open .pron-ipa { opacity: 1; }
+  /* Hover is reserved for real pointers. On a touchscreen a tap leaves :hover
+     stuck on, and tapping again re-applies it — so it could never be tapped
+     off. Touch devices use the .is-open class toggled in JS instead. */
+  @media (hover: hover) and (pointer: fine) {
+    .pron:hover {
+      color: var(--oxblood);
+      border-color: var(--oxblood);
+      width: var(--pron-i, auto);
+    }
+    .pron:hover .pron-word { opacity: 0; }
+    .pron:hover .pron-ipa  { opacity: 1; }
+  }
   /* it is focusable, so it must look focused — a 2px ring rather than a
      thickened underline, which was too easy to miss next to the border
      that is already there. Meets WCAG 2.4.11 / 1.4.11 at 5.66:1. */
@@ -725,9 +735,9 @@
             </div>
           </div>
           <div class="intro-text">
-            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true"><span class="pron-ipa-label">pronounced:</span> /ˈskaɪlər/ SKY-lər</span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
+            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true">Schuyler, pronounced: <span class="pron-ipa-text">/ˈskaɪlər/ SKY-lər</span></span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
             I am a historian by training with professional experience in the financial technology sector.
-            Most recently, I have been participating in a fellowship programme run by Fleet AI, an agentic AI startup,
+            Most recently, I have been participating in a fellowship program run by Fleet AI, an agentic AI startup,
             and working on a variety of software development projects. I am increasingly curious about the
             nature of human-AI collaboration and the role of the humanities in guiding future AI systems.
           </div>
@@ -1123,6 +1133,31 @@
         el.style.transition = prev;
       });
     }
+
+    // Tap / click / Enter toggles the pronunciation open and closed. This is
+    // what makes it dismissable on touch, where :hover never lets go.
+    function close(){ els.forEach(function(el){ el.classList.remove('is-open'); }); }
+
+    els.forEach(function(el){
+      el.addEventListener('click', function(e){
+        e.stopPropagation();
+        var open = el.classList.contains('is-open');
+        close();
+        if (!open) el.classList.add('is-open');
+      });
+      el.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          el.classList.toggle('is-open');
+        } else if (e.key === 'Escape') {
+          el.classList.remove('is-open');
+        }
+      });
+      el.addEventListener('blur', function(){ el.classList.remove('is-open'); });
+    });
+
+    // Tapping anywhere else closes it too.
+    document.addEventListener('click', close);
 
     measure();
     if (document.fonts && document.fonts.ready) { document.fonts.ready.then(measure); }
