@@ -39,20 +39,39 @@
   # Everything loads from this origin and nowhere else. The fonts are
   # self-hosted, so there is no third-party origin to allow at all.
   #
-  # 'unsafe-inline' is present because the stylesheet and the scripts live
-  # inline in index.html, which keeps the site a single portable file. The
-  # trade-off is acceptable here: there is no user input anywhere on the
-  # site, so there is no route by which an attacker could inject a script
-  # in the first place. If you ever move the CSS and JS into their own
-  # .css and .js files, delete both 'unsafe-inline' tokens below and the
-  # policy becomes materially stricter at no maintenance cost.
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+  # script-src no longer needs 'unsafe-inline': all JavaScript now lives in
+  # boot.js and main.js, which 'self' covers. The one remaining inline
+  # <script> is the JSON-LD structured data block — not executable code, but
+  # CSP checks every <script> tag regardless of type, so it is allowed by
+  # its sha256 hash instead.
+  #
+  # IMPORTANT: that hash covers the JSON-LD block byte for byte. If you edit
+  # the structured data — even adding a space — regenerate it, or search
+  # engines will stop seeing it. To regenerate on macOS, from the repo root:
+  #
+  #   python3 -c "import re,hashlib,base64;s=open('index.html').read();m=re.search(r'<script type=\"application/ld\+json\">(.*?)</script>',s,re.S);print('sha256-'+base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode())"
+  #
+  # style-src keeps 'unsafe-inline' because the stylesheet is still inline in
+  # index.html. Inline CSS is a far smaller risk than inline JS, and there is
+  # no user input anywhere on this site to inject through.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-KVE0RWNWh34bhQS37Rg+dn/pyPHDP1pTFqghdHZIBh4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+
+  # Cloudflare Pages adds "Access-Control-Allow-Origin: *" to static assets by
+  # default, which invites any other website to read this site's files from
+  # their own pages. Nothing here needs to be readable cross-origin — the
+  # fonts are same-origin, so they do not use CORS at all — so remove it.
+  # The "! " prefix is the Cloudflare Pages syntax for deleting a header.
+  ! Access-Control-Allow-Origin
 
 # HTML changes; always revalidate it.
 /
   Cache-Control: public, max-age=0, must-revalidate
 
 /index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# JavaScript changes with the site; always revalidate it.
+/*.js
   Cache-Control: public, max-age=0, must-revalidate
 
 # Fonts are content-addressed by name and never change — cache them hard.
