@@ -35,7 +35,6 @@
 <!-- Self-hosted webfonts: no third-party request, no visitor IP leaves the site -->
 <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/archivo-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
 
 <script type="application/ld+json">
 {
@@ -53,7 +52,150 @@
 }
 </script>
 
+<script>
+  // ── First-paint routing hint ──
+  // Runs before any content is parsed. If the visitor deep-linked to a
+  // specific page we flag it, so CSS suppresses the default About view and
+  // lets the router below pick the right section. On a plain visit no flag is
+  // set, so About paints as soon as the HTML arrives — no JavaScript needed.
+  (function(){
+    var h = (window.location.hash || '').toLowerCase();
+    if (h && h !== '#about' && h !== '#main') {
+      document.documentElement.className += ' hashboot';
+    }
+  })();
+</script>
+
 <style>
+  /* ═══════════════════════════════════════════════════════════════════
+     Self-hosted webfonts — replaces the Google Fonts CDN.
+     No third-party request is made, so no visitor IP is transmitted.
+
+     Archivo .......... SIL Open Font License 1.1 (Archivo-LICENSE.txt)
+     IBM Plex Sans .... SIL Open Font License 1.1 (IBMPlexSans-LICENSE.txt)
+
+     Only the weights the stylesheet actually uses are shipped:
+       Archivo         400, 500, 600           (display)
+       IBM Plex Sans   400, 500, 400 italic    (text)
+
+     Each family ships a `latin` and a `latin-ext` cut. The unicode-range
+     descriptors let the browser download only the cut a page needs.
+
+     IPA coverage (pronunciation widget, /ˈskaɪlər/):
+       ə  U+0259  present in the latin-ext cut of both families
+       ˈ  U+02C8  NOT present in any shipped cut — falls back to a system font
+       ɪ  U+026A  NOT present in any shipped cut — falls back to a system font
+     The two missing characters render in whatever the OS substitutes. This is
+     cosmetic only, and affects two glyphs at small size. Fontsource's subsets
+     simply do not include them; adding them would mean subsetting the full
+     upstream fonts by hand. latin-ext is still required — it carries the
+     schwa, plus accented Latin throughout.
+     ═══════════════════════════════════════════════════════════════════ */
+
+  /* ── Archivo — latin ── */
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/archivo-latin-400-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/archivo-latin-500-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('fonts/archivo-latin-600-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+
+  /* ── Archivo — latin-ext ── */
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/archivo-latin-ext-400-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/archivo-latin-ext-500-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Archivo';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('fonts/archivo-latin-ext-600-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  }
+
+  /* ── IBM Plex Sans — latin ── */
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/ibm-plex-sans-latin-400-italic.woff2') format('woff2');
+    unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+
+  /* ── IBM Plex Sans — latin-ext (carries the IPA glyphs) ── */
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/ibm-plex-sans-latin-ext-400-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('fonts/ibm-plex-sans-latin-ext-500-normal.woff2') format('woff2');
+    unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('fonts/ibm-plex-sans-latin-ext-400-italic.woff2') format('woff2');
+    unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
@@ -221,6 +363,18 @@
     display: block;
     animation: pageIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
   }
+  /* ── First paint ──
+     About is visible from the moment the HTML lands, rather than waiting for
+     the router script at the foot of the page. No fade on this first view:
+     the content is already late enough on a slow connection. */
+  .page[data-page="about"] { display: block; animation: none; }
+  /* Deep link to another page: stand down and let the router decide. */
+  .hashboot .page[data-page="about"]:not(.is-active) { display: none; }
+  /* Once the router has taken over, About fades in like every other page. */
+  .nav-ready .page[data-page="about"].is-active {
+    animation: pageIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+  }
+
   /* focused programmatically on route change — never draw a ring on it */
   .page:focus, main:focus { outline: none; }
 
@@ -1130,6 +1284,10 @@
     window.addEventListener('hashchange', function(){ route(fromHash()); });
 
     route(fromHash());
+
+    // The initial view is settled. From here on, page changes are navigation
+    // and should animate — including a return to About.
+    document.documentElement.className += ' nav-ready';
   })();
 </script>
 
