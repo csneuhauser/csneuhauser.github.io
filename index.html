@@ -663,13 +663,25 @@
                   transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .pron-ipa-lead { display: none; }   /* the word itself is still on screen */
-    .pron.is-open .pron-word,
+
+    /* At this width the tap toggle is the only trigger. Hover and focus are
+       wound back to the closed look, or a device that reports itself as
+       hover-capable hides the word without ever opening the line beneath. */
+    .pron:hover .pron-word,
     .pron:focus-visible .pron-word { opacity: 1; }
-    .pron.is-open .pron-ipa { transform: translateY(0); }
+    .pron:hover .pron-ipa,
+    .pron:focus-visible .pron-ipa { opacity: 0; }
+
+    /* listed after the above so it wins the tie when both are in play */
+    .pron.is-open .pron-word { opacity: 1; }
+    .pron.is-open .pron-ipa {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .intro-name-line {
       transition: margin-bottom 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .intro-name-line:has(.pron.is-open) { margin-bottom: 2.5em; }
+    .intro-name-line.pron-open { margin-bottom: 2.5em; }
 
     /* Keep the monogram on the credit line's right edge instead of letting
        it wrap to a row of its own once the text needs two lines. */
@@ -1167,24 +1179,31 @@
 
     // Tap / click / Enter toggles the pronunciation open and closed. This is
     // what makes it dismissable on touch, where :hover never lets go.
-    function close(){ els.forEach(function(el){ el.classList.remove('is-open'); }); }
+    // The parent line is flagged too, so the paragraph below can be eased out
+    // of the way on small screens without relying on CSS :has().
+    function setOpen(el, on){
+      el.classList.toggle('is-open', on);
+      var line = el.closest ? el.closest('.intro-name-line') : null;
+      if (line) line.classList.toggle('pron-open', on);
+    }
+    function close(){ els.forEach(function(el){ setOpen(el, false); }); }
 
     els.forEach(function(el){
       el.addEventListener('click', function(e){
         e.stopPropagation();
         var open = el.classList.contains('is-open');
         close();
-        if (!open) el.classList.add('is-open');
+        if (!open) setOpen(el, true);
       });
       el.addEventListener('keydown', function(e){
         if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
           e.preventDefault();
-          el.classList.toggle('is-open');
+          setOpen(el, !el.classList.contains('is-open'));
         } else if (e.key === 'Escape') {
-          el.classList.remove('is-open');
+          setOpen(el, false);
         }
       });
-      el.addEventListener('blur', function(){ el.classList.remove('is-open'); });
+      el.addEventListener('blur', function(){ setOpen(el, false); });
     });
 
     // Tapping anywhere else closes it too.
