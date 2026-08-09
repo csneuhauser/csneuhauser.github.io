@@ -368,9 +368,12 @@
      the router script at the foot of the page. No fade on this first view:
      the content is already late enough on a slow connection. */
   .page[data-page="about"] { display: block; animation: none; }
-  /* Deep link to another page: stand down and let the router decide. */
+  /* Deep link to another page: stand down before the router has even loaded. */
   .hashboot .page[data-page="about"]:not(.is-active) { display: none; }
-  /* Once the router has taken over, About fades in like every other page. */
+  /* Router is running: About is an ordinary page again, shown only when it is
+     the current one. Without this it would stay pinned above every section. */
+  .js-router .page[data-page="about"]:not(.is-active) { display: none; }
+  /* On a real navigation — not the first paint — About fades like the rest. */
   .nav-ready .page[data-page="about"].is-active {
     animation: pageIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
   }
@@ -1225,6 +1228,10 @@
     };
     var BASE_TITLE = 'C. Schuyler Neuhauser';
 
+    // The router is now in charge of which section is visible, so the CSS
+    // first-paint fallback for About can stand down.
+    document.documentElement.classList.add('js-router');
+
     var pages = document.querySelectorAll('.page');
     var links = document.querySelectorAll('.nav-link');
     var initial = true;
@@ -1281,13 +1288,14 @@
       show('');
     }
 
-    window.addEventListener('hashchange', function(){ route(fromHash()); });
+    window.addEventListener('hashchange', function(){
+      // First navigation: from here on page changes should animate, including
+      // a return to About. The initial view deliberately does not.
+      document.documentElement.classList.add('nav-ready');
+      route(fromHash());
+    });
 
     route(fromHash());
-
-    // The initial view is settled. From here on, page changes are navigation
-    // and should animate — including a return to About.
-    document.documentElement.className += ' nav-ready';
   })();
 </script>
 
