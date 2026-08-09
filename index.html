@@ -644,44 +644,28 @@
     .tl-item.has-many .tl-stint::before { left: calc(-1.7rem + 2px); }
 
     /* ── Pronunciation on small screens ──
-       The expanded phrase is wider than a phone line, so the inline-block
-       reflows onto the next line the instant it outgrows the space left —
-       a jump no transition can smooth over. Here the word stays put and the
-       pronunciation eases in underneath it, with the paragraph below moved
-       out of the way over the same duration. */
-    .pron {
-      width: var(--pron-w, auto) !important;
-      clip-path: none;
-      cursor: pointer;
-    }
-    .pron-ipa {
-      top: 100%;
-      left: 0;
-      padding-top: 0.3rem;
-      transform: translateY(-0.35rem);
-      transition: opacity 0.4s ease,
-                  transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .pron-ipa-lead { display: none; }   /* the word itself is still on screen */
+       The full phrase is wider than a phone line, so the inline-block used to
+       rewrap mid-animation — a jump no transition can smooth over. Here only
+       the transcription is shown: it is barely wider than the name itself, so
+       the box cross-fades in place without the line ever rewrapping. */
+    .pron { cursor: pointer; }
+    .pron-ipa-lead,
+    .pron-ipa-said { display: none; }
 
     /* At this width the tap toggle is the only trigger. Hover and focus are
-       wound back to the closed look, or a device that reports itself as
-       hover-capable hides the word without ever opening the line beneath. */
+       wound back to the closed state — this device reports itself as
+       hover-capable, so :hover would otherwise fire on tap and stick. */
+    .pron:hover,
+    .pron:focus-visible { width: var(--pron-w, auto); }
     .pron:hover .pron-word,
     .pron:focus-visible .pron-word { opacity: 1; }
     .pron:hover .pron-ipa,
     .pron:focus-visible .pron-ipa { opacity: 0; }
 
     /* listed after the above so it wins the tie when both are in play */
-    .pron.is-open .pron-word { opacity: 1; }
-    .pron.is-open .pron-ipa {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .intro-name-line {
-      transition: margin-bottom 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .intro-name-line.pron-open { margin-bottom: 2.5em; }
+    .pron.is-open { width: var(--pron-i, auto); }
+    .pron.is-open .pron-word { opacity: 0; }
+    .pron.is-open .pron-ipa  { opacity: 1; }
 
     /* Keep the monogram on the credit line's right edge instead of letting
        it wrap to a row of its own once the text needs two lines. */
@@ -778,7 +762,7 @@
             </div>
           </div>
           <div class="intro-text">
-            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true"><span class="pron-ipa-lead">Schuyler, </span>pronounced <span class="pron-ipa-text">/ˈskaɪlər/ SKY-lər</span></span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
+            <div class="intro-name-line">My name is <span class="pron" tabindex="0"><span class="pron-word">Schuyler</span><span class="pron-ipa" aria-hidden="true"><span class="pron-ipa-lead">Schuyler, </span><span class="pron-ipa-said">pronounced </span><span class="pron-ipa-text">/ˈskaɪlər/ SKY-lər</span></span><span class="sr-only">, pronounced SKY-lər</span></span>.</div>
             I am a historian by training with professional experience in the financial technology sector.
             Most recently, I have been participating in a fellowship program run by Fleet AI, an agentic AI startup,
             and working on a variety of software development projects. I am increasingly curious about the
@@ -1179,13 +1163,7 @@
 
     // Tap / click / Enter toggles the pronunciation open and closed. This is
     // what makes it dismissable on touch, where :hover never lets go.
-    // The parent line is flagged too, so the paragraph below can be eased out
-    // of the way on small screens without relying on CSS :has().
-    function setOpen(el, on){
-      el.classList.toggle('is-open', on);
-      var line = el.closest ? el.closest('.intro-name-line') : null;
-      if (line) line.classList.toggle('pron-open', on);
-    }
+    function setOpen(el, on){ el.classList.toggle('is-open', on); }
     function close(){ els.forEach(function(el){ setOpen(el, false); }); }
 
     els.forEach(function(el){
