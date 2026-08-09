@@ -1,0 +1,784 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Self-hosted webfonts — replaces the Google Fonts CDN.
+   No third-party request is made, so no visitor IP is transmitted.
+
+   Archivo .......... SIL Open Font License 1.1 (Archivo-LICENSE.txt)
+   IBM Plex Sans .... SIL Open Font License 1.1 (IBMPlexSans-LICENSE.txt)
+
+   Only the weights the stylesheet actually uses are shipped:
+     Archivo         400, 500, 600           (display)
+     IBM Plex Sans   400, 500, 400 italic    (text)
+
+   Each family ships a `latin` and a `latin-ext` cut. The unicode-range
+   descriptors let the browser download only the cut a page needs.
+
+   IPA coverage (pronunciation widget, /ˈskaɪlər/):
+     ə  U+0259  present in the latin-ext cut of both families
+     ˈ  U+02C8  NOT present in any shipped cut — falls back to a system font
+     ɪ  U+026A  NOT present in any shipped cut — falls back to a system font
+   The two missing characters render in whatever the OS substitutes. This is
+   cosmetic only, and affects two glyphs at small size. Fontsource's subsets
+   simply do not include them; adding them would mean subsetting the full
+   upstream fonts by hand. latin-ext is still required — it carries the
+   schwa, plus accented Latin throughout.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Archivo — latin ── */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/archivo-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/archivo-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/archivo-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* ── Archivo — latin-ext ── */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/archivo-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/archivo-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('fonts/archivo-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+/* ── IBM Plex Sans — latin ── */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/ibm-plex-sans-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/ibm-plex-sans-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/ibm-plex-sans-latin-400-italic.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* ── IBM Plex Sans — latin-ext (carries the IPA glyphs) ── */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/ibm-plex-sans-latin-ext-400-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('fonts/ibm-plex-sans-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/ibm-plex-sans-latin-ext-400-italic.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-text: 'IBM Plex Sans', system-ui, sans-serif;
+  /* ── Atlantic Coast palette (from the quarterly) ──
+     Ratios are against --paper; all text pairs meet WCAG AA. */
+  --oak: #1b2733;          /* weathered navy — primary ink        13.89:1 */
+  --chestnut: #4a5a68;     /* slate — mid body text                6.51:1 */
+  --tobacco: #636b67;      /* muted gray-green accent              5.02:1 */
+  --oxblood: #9c4a32;      /* rust — the single warm accent        5.59:1 */
+  --navy: #243748;         /* deep navy — top line & Schuyler     11.22:1 */
+  --paper: #f4f5f6;        /* cool near-white */
+  --paper-deep: #e8eaec;
+  --muted: #636b67;
+  --rule: rgba(36,55,72,0.18);        /* hairlines — decorative */
+  --rule-strong: rgba(36,55,72,0.4);  /* structural rules — decorative */
+  --underline: rgba(36,55,72,0.60);   /* link underlines — 3.55:1, meets WCAG 1.4.11 */
+}
+
+html { background: var(--paper); height: 100%; }
+
+body {
+  font-family: var(--font-text);
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Load-bearing: the pronunciation widget's absolutely-positioned IPA
+     layer sits outside its box while hidden. Removing this can produce a
+     horizontal scrollbar on narrow screens. */
+  overflow-x: hidden;
+  background: var(--paper);
+  color: var(--oak);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Visually hidden, but read aloud by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link — first in the tab order, invisible until focused */
+.skip-link {
+  position: absolute;
+  left: 0.5rem;
+  top: -4rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--oak);
+  color: var(--paper);
+  font-family: var(--font-text);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 0.5rem; }
+
+@keyframes rise { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes drawWidth { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Narkomfin ribbon: warm band edge to edge ── */
+.ribbon-top { height: 3px; background: var(--navy); width: 100%; }
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0 5rem;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+/* ── Masthead ── */
+.masthead {
+  padding: 4rem 0 0;
+  position: relative;
+  text-align: left;            /* quarterly: left-aligned masthead */
+  opacity: 0;
+  animation: fadeIn 0.7s ease 0.4s forwards;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 3.1rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  color: var(--oak);
+}
+.name em { font-style: normal; font-weight: 500; color: var(--navy); }
+
+/* the Narkomfin closing bar — but warm, double-ruled like a diploma */
+.masthead-bar {
+  margin: 1.8rem 0 0;
+  width: 100%;
+  height: 1px;
+  background: var(--oak);
+  transform-origin: left;
+  animation: drawWidth 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+}
+
+/* ── Menu bar: navigation ── */
+.masthead-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0 2.5rem;
+  margin-top: 0.95rem;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.9rem;
+}
+.nav-link {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-text);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  color: var(--tobacco);
+  padding-bottom: 0.85rem;
+  transition: color 0.25s;
+}
+.nav-link .nav-link-text { display: inline-block; margin-right: 0; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -1px;
+  height: 1.5px;
+  background: var(--oxblood);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover { color: var(--oak); }
+.nav-link.is-active { color: var(--oak); }
+.nav-link.is-active::after { transform: scaleX(1); }
+
+/* ── Pages ── */
+.page { display: none; }
+.page.is-active {
+  display: block;
+  animation: pageIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+/* ── First paint ──
+   About is visible from the moment the HTML lands, rather than waiting for
+   the router script at the foot of the page. No fade on this first view:
+   the content is already late enough on a slow connection. */
+.page[data-page="about"] { display: block; animation: none; }
+/* Deep link to another page: stand down before the router has even loaded. */
+.hashboot .page[data-page="about"]:not(.is-active) { display: none; }
+/* Router is running: About is an ordinary page again, shown only when it is
+   the current one. Without this it would stay pinned above every section. */
+.js-router .page[data-page="about"]:not(.is-active) { display: none; }
+/* On a real navigation — not the first paint — About fades like the rest. */
+.nav-ready .page[data-page="about"].is-active {
+  animation: pageIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+/* focused programmatically on route change — never draw a ring on it */
+.page:focus, main:focus { outline: none; }
+
+/* ── About: rail + intro ── */
+.layout { padding: 3rem 0 0; }
+
+/* single-column pages */
+.page-body {
+  padding: 3rem 0 0;
+  max-width: 760px;
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.intro-photo-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.intro-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--paper-deep);
+  border: 1px solid var(--rule);
+}
+.intro-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.60);
+}
+.intro-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-family: var(--font-text);
+  font-size: 0.82rem;
+}
+.intro-links a {
+  color: var(--chestnut);
+  text-decoration: none;
+  border-bottom: 1px solid var(--underline);
+  width: fit-content;
+  transition: color 0.2s, border-color 0.2s;
+}
+.intro-links a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+
+.intro-text {
+  font-family: var(--font-text);
+  font-size: 1.06rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.003em;
+  color: var(--chestnut);
+}
+.intro-name-line {
+  display: block;
+  margin-bottom: 0.55em;
+}
+
+/* ── The name that says itself ──
+   "Schuyler" widens and cross-fades into its pronunciation on hover OR
+   keyboard focus. Width is animated from measured px values (set by JS in
+   --pron-w / --pron-i); clip-path is used instead of overflow:hidden so the
+   inline baseline is left undisturbed. Screen readers get the pronunciation
+   from the .sr-only span instead of the visual layer. */
+.pron {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: baseline;
+  width: var(--pron-w, auto);
+  color: var(--oak);
+  border-bottom: 1px solid var(--underline);
+  cursor: help;
+  clip-path: inset(-0.7em 0 -0.7em 0);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.35s ease,
+              border-color 0.35s ease;
+}
+.pron-word,
+.pron-ipa {
+  display: inline-block;
+  transition: opacity 0.35s ease;
+}
+.pron-ipa {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+/* Only the IPA itself is set apart — "Schuyler, pronounced" inherits the
+   surrounding prose font, size and color so it matches the word it
+   replaces exactly; the oxblood is reserved for the transcription. */
+.pron-ipa .pron-ipa-text {
+  font-size: 0.92em;
+  letter-spacing: 0.01em;
+  color: var(--oxblood);
+}
+.pron:focus-visible,
+.pron.is-open {
+  width: var(--pron-i, auto);
+  outline: none;
+}
+.pron:focus-visible .pron-word,
+.pron.is-open .pron-word { opacity: 0; }
+.pron:focus-visible .pron-ipa,
+.pron.is-open .pron-ipa { opacity: 1; }
+/* Hover is reserved for real pointers. On a touchscreen a tap leaves :hover
+   stuck on, and tapping again re-applies it — so it could never be tapped
+   off. Touch devices use the .is-open class toggled in JS instead. */
+@media (hover: hover) and (pointer: fine) {
+  .pron:hover {
+    width: var(--pron-i, auto);
+  }
+  .pron:hover .pron-word { opacity: 0; }
+  .pron:hover .pron-ipa  { opacity: 1; }
+}
+/* it is focusable, so it must look focused — a 2px ring rather than a
+   thickened underline, which was too easy to miss next to the border
+   that is already there. Meets WCAG 2.4.11 / 1.4.11 at 5.66:1. */
+.pron:focus-visible {
+  outline: 2px solid var(--oxblood);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.info-label {
+  font-family: var(--font-text);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  color: var(--oxblood);
+  margin-bottom: 0.2rem;
+  margin-top: 1.1rem;
+}
+.info-value { font-size: 0.95rem; color: var(--oak); font-weight: 400; line-height: 1.4; }
+.info-value a {
+  color: var(--oak); text-decoration: none;
+  border-bottom: 1px solid var(--underline); transition: color 0.2s, border-color 0.2s;
+}
+.info-value a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+
+/* ── Section entries ── */
+.entry {
+  position: relative;
+  border-top: 1px solid var(--rule-strong);
+}
+.entry:first-child { border-top: none; }
+
+/* Heading row: numeral · title. The numeral is a tabular index rather than
+   a display figure, so the title carries the hierarchy. */
+.entry-head {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0 1.1rem;
+  align-items: baseline;
+  width: 100%;
+  padding: 1.75rem 0 0.95rem;
+  text-align: left;
+}
+.entry:first-child .entry-head { padding-top: 0.2rem; }
+
+.entry-num {
+  font-family: var(--font-text);
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--oxblood);
+  padding-top: 0;
+  user-select: none;
+}
+
+.entry-title {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--oak);
+}
+
+.entry-body-wrap { padding-left: 3.5rem; }
+
+.entry-body {
+  font-family: var(--font-text);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--chestnut);
+}
+.entry-body-inner { padding: 0 0 1.6rem; }
+.entry-body a {
+  color: var(--oak); text-decoration: none;
+  border-bottom: 1px solid var(--underline);
+  transition: color 0.2s, border-color 0.2s;
+}
+.entry-body a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+
+.proj-list { list-style: none; }
+.proj-list li { position: relative; padding-left: 1.35rem; margin-bottom: 0.9rem; }
+.proj-list li:last-child { margin-bottom: 0; }
+
+/* A square tick suits grotesque type better than a letterpress fleuron */
+.proj-list li::before,
+.tl-notes li::before {
+  content: '';
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--oxblood);
+  border-radius: 1px;
+}
+
+/* ── Work History: vertical timeline ── */
+.timeline {
+  list-style: none;
+  position: relative;
+  padding-left: 2.2rem;
+  max-width: 640px;
+}
+/* the engraved spine */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.7rem;
+  bottom: 0.7rem;
+  width: 1px;
+  background: var(--rule-strong);
+}
+
+.tl-item { position: relative; padding-bottom: 2.7rem; }
+.tl-item:last-child { padding-bottom: 0; }
+
+/* node on the spine, one per employer */
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -2.2rem;
+  top: 0.42rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--tobacco);
+}
+.tl-item.is-current::before { background: var(--oxblood); border-color: var(--oxblood); }
+
+.tl-org {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  color: var(--oak);
+}
+
+.tl-stint { position: relative; margin-top: 0.55rem; }
+/* secondary node, only where one employer holds more than one title */
+.tl-item.has-many .tl-stint::before {
+  content: '';
+  position: absolute;
+  left: calc(-2.2rem + 2px);
+  top: 0.62rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--rule-strong);
+}
+
+.tl-role {
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--chestnut);
+}
+.tl-date {
+  font-family: var(--font-text);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  font-variant-numeric: tabular-nums;
+  color: var(--tobacco);
+  margin-top: 0.25rem;
+}
+
+.tl-notes { list-style: none; margin-top: 0.8rem; }
+.tl-notes li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin-bottom: 0.7rem;
+  font-family: var(--font-text);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--chestnut);
+}
+.tl-notes li:last-child { margin-bottom: 0; }
+
+/* ── Contact ── */
+.contact-lede {
+  font-family: var(--font-text);
+  font-size: 1.06rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: -0.003em;
+  color: var(--chestnut);
+  max-width: 34em;
+}
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-strong);
+  max-width: 620px;
+}
+.contact-list .info-label { margin-top: 0; }
+.contact-list .info-value { font-size: 1rem; }
+
+/* ── Privacy ── */
+.prose {
+  font-family: var(--font-text);
+  font-size: 1.02rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--chestnut);
+  max-width: 34em;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule-strong);
+}
+.prose p { margin-bottom: 1rem; }
+.prose p:last-child { margin-bottom: 0; }
+.prose a {
+  color: var(--oak); text-decoration: none;
+  border-bottom: 1px solid var(--underline);
+  transition: color 0.2s, border-color 0.2s;
+}
+.prose a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+
+/* ── Footer ── */
+.footer {
+  margin-top: 3.5rem;
+  padding: 1.4rem 0 3rem;
+  border-top: 2px solid var(--oak);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  font-family: var(--font-text);
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.11em;
+  color: var(--muted);
+  opacity: 0;
+  animation: fadeIn 0.7s ease 1s forwards;
+}
+.footer a {
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--underline);
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer a:hover { color: var(--oxblood); border-color: var(--oxblood); }
+.footer-credit { flex: 1 1 auto; min-width: 0; }
+.footer .monogram-mark {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--oxblood);
+  opacity: 0.4;
+}
+.footer .monogram-mark svg {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+/* Visible keyboard focus — sans UI reads as interactive, so it
+   needs to behave that way for keyboard users too */
+a:focus-visible {
+  outline: 2px solid var(--oxblood);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 760px) {
+  .card { padding: 0 1.75rem; }
+  .name { font-size: 2.2rem; }
+  .masthead-foot { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
+  .nav { gap: 0.4rem 1.5rem; }
+  /* taller touch targets: ~40px instead of ~22px */
+  .nav-link { font-size: 0.86rem; padding-top: 0.9rem; padding-bottom: 0.5rem; }
+  .intro { grid-template-columns: 1fr; gap: 1.2rem; }
+  .layout { padding-top: 2rem; }
+  .page-body { padding-top: 2rem; }
+  .entry-head { grid-template-columns: 2rem 1fr; gap: 0 0.9rem; }
+  .entry-body-wrap { padding-left: 2.9rem; }
+  .timeline { padding-left: 1.7rem; }
+  .tl-item::before { left: -1.7rem; }
+  .tl-item.has-many .tl-stint::before { left: calc(-1.7rem + 2px); }
+
+  /* ── Pronunciation on small screens ──
+     The full phrase is wider than a phone line, so the inline-block used to
+     rewrap mid-animation — a jump no transition can smooth over. Here only
+     the transcription is shown: it is barely wider than the name itself, so
+     the box cross-fades in place without the line ever rewrapping. */
+  .pron { cursor: pointer; }
+  .pron-ipa-lead,
+  .pron-ipa-said { display: none; }
+
+  /* At this width the tap toggle is the only trigger. Hover and focus are
+     wound back to the closed state — this device reports itself as
+     hover-capable, so :hover would otherwise fire on tap and stick. */
+  .pron:hover,
+  .pron:focus-visible { width: var(--pron-w, auto); }
+  .pron:hover .pron-word,
+  .pron:focus-visible .pron-word { opacity: 1; }
+  .pron:hover .pron-ipa,
+  .pron:focus-visible .pron-ipa { opacity: 0; }
+
+  /* listed after the above so it wins the tie when both are in play */
+  .pron.is-open { width: var(--pron-i, auto); }
+  .pron.is-open .pron-word { opacity: 0; }
+  .pron.is-open .pron-ipa  { opacity: 1; }
+
+  /* Keep the monogram on the credit line's right edge instead of letting
+     it wrap to a row of its own once the text needs two lines. */
+  .footer { gap: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Print: reveal every page, drop the interactive chrome ── */
+@media print {
+  .page { display: block !important; }
+  .card { min-height: 0; padding: 0; opacity: 1; transform: none; animation: none; }
+  .masthead, .footer { opacity: 1; animation: none; }
+  .nav, .ribbon-top, .skip-link, .monogram-mark { display: none; }
+  .page-body, .layout { padding-top: 1.5rem; }
+  body { background: #fff; color: #000; }
+  .entry, .tl-item { break-inside: avoid; }
+  /* print the destination of every outbound link */
+  .entry-body a[href^="http"]::after,
+  .info-value a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; }
+}
