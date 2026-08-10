@@ -737,6 +737,13 @@ a:focus-visible {
      same distance from the nav text. */
   .nav-link { font-size: 0.86rem; padding-top: 0.9rem; padding-bottom: 0.95rem; margin-top: -0.9rem; }
   .intro { grid-template-columns: 1fr; gap: 1.2rem; }
+  /* Stack as photo, body text, links. .intro-photo-col stops being a box and
+     lets its two children sit directly in the .intro grid, so they can be
+     ordered independently. Desktop keeps the column intact. */
+  .intro-photo-col { display: contents; }
+  .intro-photo { order: 1; }
+  .intro-text  { order: 2; }
+  .intro-links { order: 3; }
   .layout { padding-top: 2rem; }
   .page-body { padding-top: 2rem; }
   .entry-head { grid-template-columns: 2rem 1fr; gap: 0 0.9rem; }
