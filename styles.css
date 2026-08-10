@@ -332,10 +332,17 @@ body {
 
 .intro {
   display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 2rem;
+  grid-template-columns: minmax(150px, max-content) 1fr;
+  grid-template-areas:
+    "photo text"
+    "links text";
+  column-gap: 2rem;
+  row-gap: 0.7rem;
   align-items: start;
 }
+.intro-photo-col { grid-area: photo; }
+.intro-links     { grid-area: links; }
+.intro-text      { grid-area: text; }
 .intro-photo-col {
   display: flex;
   flex-direction: column;
@@ -354,7 +361,7 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(0.40);
+  filter: grayscale(0.60);
 }
 .intro-links {
   display: flex;
@@ -736,14 +743,15 @@ a:focus-visible {
      here by padding-bottom, so the line above and the line below sit the
      same distance from the nav text. */
   .nav-link { font-size: 0.86rem; padding-top: 0.9rem; padding-bottom: 0.95rem; margin-top: -0.9rem; }
-  .intro { grid-template-columns: 1fr; gap: 1.2rem; }
-  /* Stack as photo, body text, links. .intro-photo-col stops being a box and
-     lets its two children sit directly in the .intro grid, so they can be
-     ordered independently. Desktop keeps the column intact. */
-  .intro-photo-col { display: contents; }
-  .intro-photo { order: 1; }
-  .intro-text  { order: 2; }
-  .intro-links { order: 3; }
+  /* single column, links moved below the body text */
+  .intro {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "photo"
+      "text"
+      "links";
+    gap: 1.2rem;
+  }
   .layout { padding-top: 2rem; }
   .page-body { padding-top: 2rem; }
   .entry-head { grid-template-columns: 2rem 1fr; gap: 0 0.9rem; }
