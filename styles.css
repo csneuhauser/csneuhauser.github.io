@@ -232,7 +232,12 @@ body {
 }
 .name em { font-style: normal; font-weight: 500; color: var(--navy); }
 .name a { color: inherit; text-decoration: none; transition: color 0.25s; }
-.name a:hover, .name a:focus-visible { color: var(--oxblood); }
+.name a:focus-visible { color: var(--oxblood); }
+/* Hover is reserved for real pointers — on a touchscreen a tap leaves :hover
+   stuck on until the next tap elsewhere. See the fuller note at .pron below. */
+@media (hover: hover) and (pointer: fine) {
+  .name a:hover { color: var(--oxblood); }
+}
 
 /* the Narkomfin closing bar — but warm, double-ruled like a diploma */
 .masthead-bar {
